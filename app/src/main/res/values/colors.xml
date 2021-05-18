@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="purple_200">#FFBB86FC</color>
+    <color name="purple_500">#FF6200EE</color>
+    <color name="purple_700">#FF3700B3</color>
+    <color name="teal_200">#FF03DAC5</color>
+    <color name="teal_700">#FF018786</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="skyBlue">#aff1da</color>
+
+
+    <color name="colorPrimary">#1D71B8</color>
+    <color name="darkPrimaryVariant">#1D71B8</color>
+    <!--    <color name="Secondary">#2869E0</color>-->
+    <color name="Secondary">#1D71B8</color>
+    <color name="SecondaryVariant">#FF018786</color>
+    <color name="black">#010101</color>
+
+
+    <!--colors using in views-->
+    <color name="colorBlue">#D2691E</color>
+    <color name="colorOnBlue">#F4B050</color>
+    <color name="colorMidBlue">#361E80</color>
+    <color name="colorDarkBlue">#262163</color>
+    <color name="colorOnDarkBlue">#262262</color>
+    <color name="colorLightGrey">#DADADA</color>
+    <color name="colorBlack">#000000</color>
+    <color name="colorWhite">#FFFFFF</color>
+    <color name="colorBackground">#88EAEAEA</color>
+    <color name="colorRed">#EE4035</color>
+    <color name="colorChart">#F2EFFF</color>
+    <color name="colorLightGreen">#00BC45</color>
+    <color name="backgroundWhiteTransparent">#CCFFFFFF</color>
+    <color name="colorLRating">#0099CD</color>
+    <color name="colorYellow">#FF9200</color>
+    <color name="colorExtraLightGrey">#F5F5F5</color>
+    <color name="colorShadowGrey">#0000000D</color>
+    <color name="colorLDarkRed">#B4000C</color>
+    <color name="colorLLightRed">#FF7600</color>
+    <color name="colorOnRed">#DD4036</color>
+    <color name="colorLightSage">#E1E1E1</color>
+</resources>

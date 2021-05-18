@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Style Parameters For Dialog View -->
+    <declare-styleable name="BaseShowingView">
+        <attr name="dialog_style" format="reference" />
+        <attr name="view_layout" format="reference" />
+        <attr name="cancelable" format="boolean" />
+    </declare-styleable>
+
+    <declare-styleable name="MyUIMode">
+        <attr name="is_light_dark_mode" format="boolean" />
+
+        <!-- TRUE for Primary, FALSE for Secondary -->
+        <attr name="is_primary_color" format="boolean" />
+
+        <attr name="rounded" format="dimension" />
+    </declare-styleable>
+
+    <!-- Style Parameters For Bottom Navigation View -->
+    <declare-styleable name="FabBottomNavigationView">
+        <attr name="fab_cradle_margin" format="dimension" />
+        <attr name="fab_cradle_rounded_corner_radius" format="dimension" />
+        <attr name="cradle_vertical_offset" format="dimension" />
+        <attr name="fab_size" format="dimension" />
+    </declare-styleable>
+</resources>

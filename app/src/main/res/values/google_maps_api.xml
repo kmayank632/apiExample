@@ -1,0 +1,24 @@
+<resources>
+
+    <!--
+
+    To get one, follow this link, follow the directions and press "Create" at the end:
+
+    https://console.developers.google.com/flows/enableapi?apiid=maps_android_backend&keyType=CLIENT_SIDE_ANDROID&r=FA:D4:5D:63:7D:9B:5C:34:D6:1D:5C:A5:DE:5A:D9:10:6F:ED:BD:78%3Bcom.relinns.appsrhino.rider
+
+    You can also add your credentials to an existing key, using these values:
+
+    Package name:
+    Check Package Name for your flavor in build.gradle (:app)
+
+    SHA-1 certificate fingerprint:
+    FA:D4:5D:63:7D:9B:5C:34:D6:1D:5C:A5:DE:5A:D9:10:6F:ED:BD:78
+
+    Alternatively, follow the directions here:
+    https://developers.google.com/maps/documentation/android/start#get-key
+
+    Once you have your key (it starts with "AIza"), replace the "google_maps_key"
+    string in this file.
+    -->
+    <string name="google_maps_key" translatable="false" templateMergeStrategy="preserve">AIzaSyDWqct-rhpBF_LxWCjMmJAo0x6XhOUcHIM</string> <!-- Associated with sumertech1977@gmail.com Project: zoom-cuisines -->
+</resources>

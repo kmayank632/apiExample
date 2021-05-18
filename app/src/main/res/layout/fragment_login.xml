@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".view.fragment.login.LoginFragment">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.example.apipractice.login.LoginVM" />
+    </data>
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/scrollView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:padding="@dimen/_16sdp">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/logoImageView"
+                style="@style/LogoStyle"
+                android:tint="#aff1da"
+                android:layout_marginBottom="@dimen/_30sdp"
+                app:layout_constraintBottom_toTopOf="@id/uniqueIdTextView"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/uniqueIdTextView"
+                style="@style/TextViewStyle.MEDIUM"
+                android:text="Medoplus Id"
+                android:textColor="@color/black"
+                app:layout_constraintBottom_toTopOf="@id/uniqueIdEditText"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/uniqueIdEditText"
+                style="@style/EditTextStyle"
+                android:layout_marginBottom="@dimen/_16sdp"
+                android:hint="@string/please_enter_medoID"
+                android:inputType="textPersonName"
+                android:text="@={viewModel.usernameField}"
+                app:layout_constraintBottom_toTopOf="@id/PasswordTextView"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/PasswordTextView"
+                style="@style/TextViewStyle.MEDIUM"
+                android:text="@string/password"
+                android:textColor="@color/black"
+                app:layout_constraintBottom_toTopOf="@id/passwordEditText"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/passwordEditText"
+                style="@style/EditTextStyle"
+                android:layout_marginBottom="@dimen/_14sdp"
+                android:hint="@string/password_hint"
+                android:inputType="textPassword"
+                android:text="@={viewModel.passwordField}"
+                app:layout_constraintBottom_toTopOf="@id/forgotPasswordTextView"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/forgotPasswordTextView"
+                style="@style/TextViewStyle"
+                android:layout_width="wrap_content"
+                android:layout_marginBottom="@dimen/_24sdp"
+                android:background="?android:attr/selectableItemBackground"
+                android:padding="@dimen/_4sdp"
+                android:visibility="gone"
+                android:text="@string/forgot_password"
+                android:textColor="@color/colorOnBlue"
+                app:layout_constraintBottom_toTopOf="@id/term_conditions_text_view"
+                app:layout_constraintEnd_toStartOf="@id/signUpTextView"
+                app:layout_constraintHorizontal_chainStyle="spread_inside"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/signUpTextView"
+                style="@style/TextViewStyle"
+                android:layout_width="wrap_content"
+                android:background="?android:attr/selectableItemBackground"
+                android:padding="@dimen/_4sdp"
+                android:visibility="gone"
+                android:text="@string/sign_up"
+                android:textColor="@color/colorOnBlue"
+                app:layout_constraintBaseline_toBaselineOf="@id/forgotPasswordTextView"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/forgotPasswordTextView" />
+
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/term_conditions_text_view"
+                style="@style/TextViewStyle.REGULAR"
+                android:layout_marginBottom="@dimen/_10sdp"
+                android:text="@string/description_to_accept_privacy_policy"
+                android:textColor="@color/black"
+                app:layout_constraintBottom_toTopOf="@id/login_button"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/login_button"
+                style="@style/ButtonStyle"
+                android:layout_marginBottom="@dimen/_10sdp"
+                android:text="@string/login"
+                android:gravity="center"
+                app:layout_constraintBottom_toTopOf="@id/sign_up_using_phone_button"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/sign_up_using_phone_button"
+                style="@style/ButtonStyle.Outline"
+                android:layout_marginBottom="@dimen/_10sdp"
+                android:visibility="invisible"
+                android:text="@string/sign_in_using_phone_otp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"/>
+
+
+            <ProgressBar
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:indeterminate="true"
+                android:visibility="@{viewModel.visible}"
+                android:indeterminateTint="#aff1da"
+                android:indeterminateTintMode="src_atop"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"/>
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+</layout>

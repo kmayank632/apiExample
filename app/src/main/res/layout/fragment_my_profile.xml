@@ -1,0 +1,312 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:card_view="https://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.example.apipractice.profile.ProfileVM" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/scrollView"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:fillViewport="true"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/constraintLayout2"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="@dimen/_100sdp"
+                    android:background="@drawable/shape"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/inflate_pharmacy_card"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_12sdp"
+                        android:layout_marginTop="@dimen/_80sdp"
+                        android:layout_marginEnd="@dimen/_12sdp"
+                        android:padding="@dimen/_4sdp"
+                        app:cardCornerRadius="@dimen/_6sdp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        card_view:cardBackgroundColor="@colors/colorWhite"
+                        card_view:cardElevation="@dimen/_5sdp"
+                        card_view:cardUseCompatPadding="true">
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:padding="@dimen/_8sdp">
+
+                            <com.google.android.material.textview.MaterialTextView
+                                android:id="@+id/profileAddressTextView"
+                                style="@style/TextViewStyle.BOLD"
+                                android:layout_width="wrap_content"
+                                android:layout_marginTop="@dimen/_4sdp"
+                                android:hint="@string/location"
+                                android:text="@{viewModel.addressFirstField}"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                            <com.google.android.material.textview.MaterialTextView
+                                android:id="@+id/profileBirthdayTextView"
+                                style="@style/TextViewStyle.REGULAR"
+                                android:layout_marginTop="@dimen/_8sdp"
+                                android:layout_marginEnd="@dimen/_4sdp"
+                                android:drawableStart="@drawable/ic_birthday"
+                                android:drawablePadding="@dimen/_10sdp"
+                                android:fontFamily="@font/open_sans_semi_bold"
+                                android:textColor="@color/colorBlack"
+                                android:hint="25-02-2021"
+                                android:text="@{viewModel.dobField}"
+                                app:layout_constraintEnd_toStartOf="@+id/bloodGroupTextView"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toBottomOf="@+id/profileAddressTextView" />
+
+                            <com.google.android.material.textview.MaterialTextView
+                                android:id="@+id/bloodGroupTextView"
+                                style="@style/TextViewStyle.REGULAR"
+                                android:layout_width="wrap_content"
+                                android:textColor="@color/colorLightGreen"
+                                android:textSize="@dimen/_10sdp"
+                                android:gravity="end"
+                                android:hint="B+"
+                                android:text="@{viewModel.bloodGroup}"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toEndOf="@+id/profileBirthdayTextView"
+                                app:layout_constraintTop_toTopOf="@+id/profileBirthdayTextView" />
+
+                            <com.google.android.material.textview.MaterialTextView
+                                android:id="@+id/medoIdTextView"
+                                style="@style/TextViewStyle.SMALL"
+                                android:fontFamily="@font/open_sans_bold"
+                                android:layout_marginTop="@dimen/_8sdp"
+                                android:textSize="@dimen/_10sdp"
+                                android:text="@{String.format(@string/medo_id_format, viewModel.medoPlusIdField.trim())}"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintTop_toBottomOf="@+id/profileBirthdayTextView" />
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/editBasicDetailTextView"
+                        style="@style/TextViewStyle.REGULAR"
+                        android:layout_width="wrap_content"
+                        android:layout_marginTop="@dimen/_25sdp"
+                        android:background="@color/white"
+                        android:padding="@dimen/_4sdp"
+                        android:text="@string/edit_basic_detail_text"
+                        android:textAlignment="viewEnd"
+                        android:textColor="@color/colorOnBlue"
+                        android:textColorHighlight="@color/black"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/health_profile_card" />
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/health_profile_card"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_12sdp"
+                        android:layout_marginTop="@dimen/_30sdp"
+                        android:layout_marginEnd="@dimen/_12sdp"
+                        android:layout_marginBottom="@dimen/_16sdp"
+                        android:padding="@dimen/_4sdp"
+                        app:cardCornerRadius="@dimen/_6sdp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/inflate_pharmacy_card"
+                        card_view:cardBackgroundColor="@colors/colorWhite"
+                        app:layout_constraintVertical_bias="0"
+                        card_view:cardElevation="@dimen/_5sdp"
+                        card_view:cardUseCompatPadding="true">
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:padding="@dimen/_8sdp">
+
+                            <com.google.android.material.textview.MaterialTextView
+                                android:id="@+id/healthIsuuesTextView"
+                                style="@style/TextViewStyle.MEDIUM"
+                                android:layout_marginTop="@dimen/_4sdp"
+                                android:text="Existing health issues"
+                                app:layout_constraintEnd_toStartOf="@+id/healthIsuuesText"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                            <com.google.android.material.textview.MaterialTextView
+                                android:id="@+id/healthIsuuesText"
+                                style="@style/TextViewStyle"
+                                android:hint="Damon"
+                                android:text="@{viewModel.healthIssuesField}"
+                                android:textAlignment="viewEnd"
+                                app:layout_constraintBottom_toTopOf="@+id/healthIsuuesView"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toEndOf="@+id/healthIsuuesTextView"
+                                app:layout_constraintTop_toTopOf="@id/healthIsuuesTextView" />
+
+                            <View
+                                android:id="@+id/healthIsuuesView"
+                                android:layout_width="0dp"
+                                android:layout_height="@dimen/_1sdp"
+                                android:layout_marginTop="@dimen/_10sdp"
+                                android:background="@color/colorLightGrey"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toBottomOf="@+id/healthIsuuesText" />
+
+                            <com.google.android.material.textview.MaterialTextView
+                                android:id="@+id/healthInsuranceProviderTextView"
+                                style="@style/TextViewStyle.MEDIUM"
+                                android:layout_width="wrap_content"
+                                android:layout_marginTop="@dimen/_10sdp"
+                                android:text="Health insurance provider"
+                                app:layout_constraintEnd_toStartOf="@+id/healthInsuranceProviderText"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toBottomOf="@+id/healthIsuuesView" />
+
+                            <com.google.android.material.textview.MaterialTextView
+                                android:id="@+id/healthInsuranceProviderText"
+                                style="@style/TextViewStyle"
+                                android:layout_marginStart="@dimen/_4sdp"
+                                android:hint="Empty"
+                                android:text="@{viewModel.healthProviderField}"
+                                android:textAlignment="viewEnd"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toEndOf="@+id/healthInsuranceProviderTextView"
+                                app:layout_constraintTop_toTopOf="@+id/healthInsuranceProviderTextView" />
+
+                            <View
+                                android:id="@+id/healthInsuranceProviderView"
+                                android:layout_width="0dp"
+                                android:layout_height="@dimen/_1sdp"
+                                android:layout_marginTop="@dimen/_10sdp"
+                                android:background="@color/colorLightGrey"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toBottomOf="@+id/healthInsuranceProviderText" />
+
+                            <com.google.android.material.textview.MaterialTextView
+                                android:id="@+id/healthInsurancePolicyTextView"
+                                style="@style/TextViewStyle.MEDIUM"
+                                android:layout_width="wrap_content"
+                                android:layout_marginTop="@dimen/_10sdp"
+                                android:text="Health insurance policy no."
+                                app:layout_constraintEnd_toStartOf="@+id/healthInsurancePolicyText"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toBottomOf="@+id/healthInsuranceProviderView" />
+
+                            <com.google.android.material.textview.MaterialTextView
+                                android:id="@+id/healthInsurancePolicyText"
+                                style="@style/TextViewStyle"
+                                android:hint="Empty"
+                                android:textAlignment="viewEnd"
+                                android:text="@{viewModel.healthPolicyNumberField}"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toEndOf="@+id/healthInsurancePolicyTextView"
+                                app:layout_constraintTop_toTopOf="@+id/healthInsurancePolicyTextView" />
+
+
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+                    </com.google.android.material.card.MaterialCardView>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/nameTextView"
+                    style="@style/TextViewStyle.MEDIUM"
+                    android:layout_width="wrap_content"
+                    android:layout_marginTop="@dimen/_18sdp"
+                    android:text="@{viewModel.firstNameField + ' ' + viewModel.lastNameField}"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/phoneNoTextView"
+                    style="@style/TextViewStyle.SMALL"
+                    android:layout_width="wrap_content"
+                    android:layout_marginTop="@dimen/_6sdp"
+                    android:fontFamily="@font/open_sans_bold"
+                    android:hint="8449701684"
+                    android:text="@{viewModel.phoneNumberField}"
+                    android:textAlignment="viewEnd"
+                    android:textSize="@dimen/_10sdp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/nameTextView" />
+
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/appCompatImageView"
+                    android:layout_width="@dimen/_80sdp"
+                    android:layout_height="@dimen/_80sdp"
+                    android:layout_marginTop="@dimen/_16sdp"
+                    android:background="#f5f186"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/phoneNoTextView" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/editImage"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_edit_marker"
+                    android:tint="@color/black"
+                    app:layout_constraintBottom_toBottomOf="@+id/appCompatImageView"
+                    app:layout_constraintEnd_toEndOf="@+id/appCompatImageView" />
+
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/logout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Logout"
+                    android:visibility="gone"
+                    android:layout_marginBottom="@dimen/_16sdp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.core.widget.NestedScrollView>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>
