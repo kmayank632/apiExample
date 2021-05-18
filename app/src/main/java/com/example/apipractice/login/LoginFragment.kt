@@ -41,11 +41,6 @@ class LoginFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         storePreferencesss = StorePreferencesss(requireContext())
-        GlobalScope.launch {
-            storePreferencesss.setToken(viewModel.token.get().toString())
-            storePreferencesss.setUser(viewModel.userType.get().toString())
-
-        }
         storePreferencesss.getUser.asLiveData().observe(requireActivity(), {
             user = it
             if(it == "PATIENT"){
@@ -58,15 +53,16 @@ class LoginFragment : Fragment() {
         setClick()
     }
 
-    override fun onPause() {
-        super.onPause()
-
-    }
-
     fun setClick() {
         binding.loginButton.setOnClickListener {
             login()
             Log.e(TAG, "mssg6")
+
+        }
+        GlobalScope.launch {
+            storePreferencesss.setToken(viewModel.token.get().toString())
+            storePreferencesss.setUser(viewModel.userType.get().toString())
+
         }
 
     }
