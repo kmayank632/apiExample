@@ -1,10 +1,17 @@
 package com.example.apipractice
 
+import android.content.ContentValues.TAG
+import android.util.Log
+import com.example.apipractice.application.MyApplication
 import okhttp3.Interceptor
 import okhttp3.Response
 
 class MyIntercepter : Interceptor {
+
     override fun intercept(chain: Interceptor.Chain): Response {
+        val app = MyApplication()
+        var token: String? = null
+        Log.e(TAG,"token ${token}")
         val request = chain.request()
             .newBuilder()
             .addHeader("Accept:", "application/json")

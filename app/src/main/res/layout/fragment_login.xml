@@ -20,6 +20,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
+            android:id="@+id/layout"
             android:padding="@dimen/_16sdp">
 
             <androidx.appcompat.widget.AppCompatImageView
@@ -48,6 +49,7 @@
                 android:layout_marginBottom="@dimen/_16sdp"
                 android:hint="@string/please_enter_medoID"
                 android:inputType="textPersonName"
+                setError="@{viewModel.isValidUsername()}"
                 android:text="@={viewModel.usernameField}"
                 app:layout_constraintBottom_toTopOf="@id/PasswordTextView"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -68,6 +70,7 @@
                 android:layout_marginBottom="@dimen/_14sdp"
                 android:hint="@string/password_hint"
                 android:inputType="textPassword"
+                setError="@{viewModel.isValidPassword()}"
                 android:text="@={viewModel.passwordField}"
                 app:layout_constraintBottom_toTopOf="@id/forgotPasswordTextView"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -134,10 +137,11 @@
 
 
             <ProgressBar
+                android:id="@+id/progress"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:indeterminate="true"
-                android:visibility="@{viewModel.visible}"
+                visibleOrGone="@{viewModel.visible}"
                 android:indeterminateTint="#aff1da"
                 android:indeterminateTintMode="src_atop"
                 app:layout_constraintStart_toStartOf="parent"

@@ -1,8 +1,7 @@
-package com.example.apipractice
+package com.example.apipractice.application
 
 
 import android.content.Context
-import android.media.session.MediaSession
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.datastore.preferences.createDataStore
@@ -42,4 +41,3 @@ class StorePreferencesss(context: Context) {
     }
 
 }
-
