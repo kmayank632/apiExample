@@ -1,5 +1,8 @@
 package com.example.apipractice.datamodel
 
+import androidx.annotation.Keep
+
+@Keep
 data class ProfileAddress(
     val line1: DataValue? = null,
     val line2: DataValue? = null,

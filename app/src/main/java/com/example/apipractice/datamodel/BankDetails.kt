@@ -1,6 +1,8 @@
 package com.example.apipractice.datamodel
 
+import androidx.annotation.Keep
 
+@Keep
 data class BankDetails(
     val accountHolderName: AccountHolderName?,
     val accountNumber: String?,

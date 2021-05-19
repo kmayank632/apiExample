@@ -1,8 +1,9 @@
 package com.example.apipractice.datamodel
 
+import androidx.annotation.Keep
 import com.google.gson.annotations.SerializedName
 
-
+@Keep
 data class ProfileData(
     @SerializedName("healthInsurance") val healthInsurance: ProfileHealthInsurance? = null,
     val medicalHistories: List<MedicalHistoryData>? = null,

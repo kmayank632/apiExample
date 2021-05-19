@@ -19,7 +19,9 @@ class UserRepository {
             .enqueue(object : Callback<LoginModel> {
                 override fun onResponse(call: Call<LoginModel>, response: Response<LoginModel>) {
                     if (response.isSuccessful) {
-                        loginResponse.value = response.body()
+                        if (response.body() != null ) {
+                            loginResponse.value = response.body()
+                        }
                     } else {
                         responsee.value = response.errorBody().toString()
                     }
