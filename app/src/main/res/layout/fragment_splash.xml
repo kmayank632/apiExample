@@ -16,7 +16,7 @@
             android:id="@+id/logo"
             style="@style/LogoStyle"
             app:layout_constraintDimensionRatio="H,7:3"
-            android:tint="#aff1da"
+            android:tint="@color/skyBlue"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"

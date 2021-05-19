@@ -8,7 +8,7 @@
 
     <fragment
         android:id="@+id/loginFragment"
-        android:name="com.example.apipractice.login.LoginFragment"
+        android:name="com.example.apipractice.view.fragment.login.LoginFragment"
         android:label="LoginFragment" >
         <action
             android:id="@+id/action_loginFragment_to_profileFragment"
@@ -19,7 +19,7 @@
 
     <fragment
         android:id="@+id/profileFragment"
-        android:name="com.example.apipractice.profile.ProfileFragment"
+        android:name="com.example.apipractice.view.fragment.profile.ProfileFragment"
         android:label="ProfileFragment" >
         <action
             android:id="@+id/action_profileFragment_to_loginFragment"
@@ -29,7 +29,7 @@
     </fragment>
     <fragment
         android:id="@+id/splashFragment"
-        android:name="com.example.apipractice.splash.SplashFragment"
+        android:name="com.example.apipractice.view.fragment.splash.SplashFragment"
         android:label="SplashFragment" >
         <action
             android:id="@+id/action_splashFragment_to_loginFragment"

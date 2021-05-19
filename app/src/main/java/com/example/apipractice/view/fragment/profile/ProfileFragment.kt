@@ -1,4 +1,4 @@
-package com.example.apipractice.profile
+package com.example.apipractice.view.fragment.profile
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -11,7 +11,8 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.apipractice.R
 import com.example.apipractice.application.MyApplication
-import com.example.apipractice.application.StorePreferencesss
+import com.example.apipractice.basemodel.Constants
+import com.example.apipractice.utills.StorePreferencesss
 import com.example.apipractice.databinding.FragmentMyProfileBinding
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -20,9 +21,12 @@ class ProfileFragment : Fragment() {
 
     lateinit var binding: FragmentMyProfileBinding
     lateinit var viewModel: ProfileVM
-    val app = MyApplication()
     lateinit var storePreferencesss: StorePreferencesss
 
+    companion object{
+        val LOGOUT = "LOGOUT"
+
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -56,11 +60,11 @@ class ProfileFragment : Fragment() {
 
             // clear dataStore token and userType
             GlobalScope.launch {
-                storePreferencesss.setToken("")
-                storePreferencesss.setUser("")
+                storePreferencesss.storeValue(StorePreferencesss.Token ,"")
+                storePreferencesss.storeValue(StorePreferencesss.User ,"")
             }
             val bundle = bundleOf().apply {
-                putString("KEY" , "LOGOUT")
+                putString(Constants.KEY , LOGOUT)
             }
             findNavController().navigate(R.id.action_profileFragment_to_loginFragment,bundle)
         }

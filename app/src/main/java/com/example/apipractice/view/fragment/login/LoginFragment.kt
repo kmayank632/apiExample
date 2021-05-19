@@ -1,4 +1,4 @@
-package com.example.apipractice.login
+package com.example.apipractice.view.fragment.login
 
 import android.content.ContentValues.TAG
 import android.os.Bundle
@@ -12,18 +12,21 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.asLiveData
 import androidx.navigation.fragment.findNavController
 import com.example.apipractice.R
 import com.example.apipractice.application.MyApplication
-import com.example.apipractice.application.StorePreferencesss
-import com.example.apipractice.application.snackBarMessage
+import com.example.apipractice.basemodel.Constants
 import com.example.apipractice.databinding.FragmentLoginBinding
 import com.example.apipractice.datamodel.LoginModel
 import com.example.apipractice.network.AuthListner
+import com.example.apipractice.utills.StorePreferencesss
+import com.example.apipractice.view.fragment.profile.ProfileFragment.Companion.LOGOUT
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
+
+//TODO Move Packages and Classes to Similar package like views > fragment > auth > login etc
+//TODO Remove Warnings and Write Proper Comments
 
 class LoginFragment : Fragment(), AuthListner {
 
@@ -36,7 +39,7 @@ class LoginFragment : Fragment(), AuthListner {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         // Inflate the layout for this fragment
         binding = DataBindingUtil.inflate(
             inflater, R.layout.fragment_login, container, false
@@ -50,9 +53,15 @@ class LoginFragment : Fragment(), AuthListner {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         storePreferencesss = StorePreferencesss(requireContext())
-        when (arguments?.getString("KEY")) {
-            "LOGOUT" ->
-                Snackbar.make(requireContext(),binding.layout,"Logout",Snackbar.LENGTH_SHORT).show()
+
+        when (arguments?.getString(Constants.KEY)) {
+            LOGOUT ->
+                Snackbar.make(
+                    requireContext(),
+                    binding.layout,
+                    "Logout Successfully",
+                    Snackbar.LENGTH_SHORT
+                ).show()
 
         }
         setClick()
@@ -66,9 +75,21 @@ class LoginFragment : Fragment(), AuthListner {
 
     override fun onSuccess(loginResponse: LiveData<LoginModel>) {
         loginResponse.observe(this, Observer {
+
+            //TODO Use Coroutines in ViewModel
             GlobalScope.launch {
-                it.data?.token?.let { it1 -> storePreferencesss.setToken(it1) }
-                it.data?.userType?.let { it1 -> storePreferencesss.setUser(it1) }
+                it.data?.token?.let { it1 ->
+                    storePreferencesss.storeValue(
+                        StorePreferencesss.Token,
+                        it1
+                    )
+                }
+                it.data?.userType?.let { it1 ->
+                    storePreferencesss.storeValue(
+                        StorePreferencesss.User,
+                        it1
+                    )
+                }
             }
             Log.e(TAG, "response $it")
             Toast.makeText(
@@ -76,7 +97,8 @@ class LoginFragment : Fragment(), AuthListner {
                 it.message,
                 Toast.LENGTH_SHORT
             ).show()
-            if(it.message == "Login success" ) {
+
+            if (it.data?.userType == Constants.USER_TYPE.PATIENT) {
                 findNavController().navigate(R.id.action_loginFragment_to_profileFragment)
             }
         })

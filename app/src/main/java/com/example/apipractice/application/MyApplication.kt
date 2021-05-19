@@ -7,21 +7,27 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.multidex.MultiDex
 
-
+//TODO Proper Commenting on Methods with Parameters
+//TODO Make All Data Classes Parcelable and use @Keep Annotation (if not used)
 class MyApplication : Application() {
 
     lateinit var currentActivity: AppCompatActivity
 
-    private var mInstance: MyApplication? = null
+
 
     private var logintoken: String = ""
 
     private var loginuserType: String? = ""
 
+    companion object {
 
-    @Synchronized
-    fun getApplication(): MyApplication? {
-        return mInstance
+        lateinit var mInstance: MyApplication
+
+        @Synchronized
+        fun getApplication(): MyApplication {
+            return mInstance
+        }
+
     }
 
     override fun attachBaseContext(base: Context?) {

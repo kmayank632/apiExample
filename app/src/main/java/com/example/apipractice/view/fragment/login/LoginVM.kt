@@ -1,17 +1,17 @@
-package com.example.apipractice.login
+package com.example.apipractice.view.fragment.login
 
 import android.content.ContentValues.TAG
 import android.util.Log
 import androidx.databinding.ObservableBoolean
 import androidx.databinding.ObservableField
 import androidx.lifecycle.ViewModel
-import com.example.apipractice.application.BaseModel
-import com.example.apipractice.application.MyApplication
+import com.example.apipractice.basemodel.BaseModel
 import com.example.apipractice.network.AuthListner
 import com.example.apipractice.repo.UserRepository
 import com.google.gson.JsonObject
 
-
+//TODO Write Proper Comments
+//TODO Don't use static resources
 class LoginVM : ViewModel() {
     /* UI Fields */
     val usernameField = ObservableField("PAP12MA00031")
@@ -19,11 +19,10 @@ class LoginVM : ViewModel() {
     val isValidUsername = ObservableField(BaseModel(true))
     val isValidPassword = ObservableField(BaseModel(true))
     val visible = ObservableBoolean(false)
-    val app = MyApplication()
+
     var authListner: AuthListner? = null
 
     fun setLogin() {
-
         /* Check Username */
         if (usernameField.get()?.trim().isNullOrEmpty()) {
             /* Notify User */
@@ -66,7 +65,6 @@ class LoginVM : ViewModel() {
         sessionJsonObject.addProperty("fcmToken", "fcmToken")
         sessionJsonObject.addProperty("deviceId", "deviceId")
         sessionJsonObject.addProperty("notificationsEnabled", true)
-        Log.e(TAG, "mssg1")
 
         val jsonObject = JsonObject()
         jsonObject.addProperty("username", usernameField.get()?.trim() ?: "")
@@ -76,7 +74,7 @@ class LoginVM : ViewModel() {
         visible.set(true)
         val loginResponse = UserRepository().userLogin(jsonObject)
         authListner?.onSuccess(loginResponse)
-          visible.set(false)
+        visible.set(false)
     }
 
 

@@ -7,7 +7,7 @@
 
         <variable
             name="viewModel"
-            type="com.example.apipractice.profile.ProfileVM" />
+            type="com.example.apipractice.view.fragment.profile.ProfileVM" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -82,7 +82,7 @@
                                 android:drawablePadding="@dimen/_10sdp"
                                 android:fontFamily="@font/open_sans_semi_bold"
                                 android:textColor="@color/colorBlack"
-                                android:hint="25-02-2021"
+                                android:hint="@string/profile_date"
                                 android:text="@{viewModel.dobField}"
                                 app:layout_constraintEnd_toStartOf="@+id/bloodGroupTextView"
                                 app:layout_constraintStart_toStartOf="parent"
@@ -95,7 +95,7 @@
                                 android:textColor="@color/colorLightGreen"
                                 android:textSize="@dimen/_10sdp"
                                 android:gravity="end"
-                                android:hint="B+"
+                                android:hint="@string/Profile_blood_group"
                                 android:text="@{viewModel.bloodGroup}"
                                 app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintStart_toEndOf="@+id/profileBirthdayTextView"
@@ -160,7 +160,7 @@
                                 android:id="@+id/healthIsuuesTextView"
                                 style="@style/TextViewStyle.MEDIUM"
                                 android:layout_marginTop="@dimen/_4sdp"
-                                android:text="Existing health issues"
+                                android:text="@string/existing_health_issues"
                                 app:layout_constraintEnd_toStartOf="@+id/healthIsuuesText"
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintTop_toTopOf="parent" />
@@ -168,7 +168,7 @@
                             <com.google.android.material.textview.MaterialTextView
                                 android:id="@+id/healthIsuuesText"
                                 style="@style/TextViewStyle"
-                                android:hint="Damon"
+                                android:hint="@string/damon"
                                 android:text="@{viewModel.healthIssuesField}"
                                 android:textAlignment="viewEnd"
                                 app:layout_constraintBottom_toTopOf="@+id/healthIsuuesView"
@@ -191,7 +191,7 @@
                                 style="@style/TextViewStyle.MEDIUM"
                                 android:layout_width="wrap_content"
                                 android:layout_marginTop="@dimen/_10sdp"
-                                android:text="Health insurance provider"
+                                android:text="@string/health_insurance_provider"
                                 app:layout_constraintEnd_toStartOf="@+id/healthInsuranceProviderText"
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintTop_toBottomOf="@+id/healthIsuuesView" />
@@ -200,7 +200,7 @@
                                 android:id="@+id/healthInsuranceProviderText"
                                 style="@style/TextViewStyle"
                                 android:layout_marginStart="@dimen/_4sdp"
-                                android:hint="Empty"
+                                android:hint="@string/empty"
                                 android:text="@{viewModel.healthProviderField}"
                                 android:textAlignment="viewEnd"
                                 app:layout_constraintEnd_toEndOf="parent"
@@ -222,7 +222,7 @@
                                 style="@style/TextViewStyle.MEDIUM"
                                 android:layout_width="wrap_content"
                                 android:layout_marginTop="@dimen/_10sdp"
-                                android:text="Health insurance policy no."
+                                android:text="@string/health_insurance_policy_no"
                                 app:layout_constraintEnd_toStartOf="@+id/healthInsurancePolicyText"
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintTop_toBottomOf="@+id/healthInsuranceProviderView" />
@@ -230,7 +230,7 @@
                             <com.google.android.material.textview.MaterialTextView
                                 android:id="@+id/healthInsurancePolicyText"
                                 style="@style/TextViewStyle"
-                                android:hint="Empty"
+                                android:hint="@string/empty"
                                 android:textAlignment="viewEnd"
                                 android:text="@{viewModel.healthPolicyNumberField}"
                                 app:layout_constraintEnd_toEndOf="parent"
@@ -262,7 +262,7 @@
                     android:layout_width="wrap_content"
                     android:layout_marginTop="@dimen/_6sdp"
                     android:fontFamily="@font/open_sans_bold"
-                    android:hint="8449701684"
+                    android:hint="@string/phn"
                     android:text="@{viewModel.phoneNumberField}"
                     android:textAlignment="viewEnd"
                     android:textSize="@dimen/_10sdp"
@@ -296,7 +296,7 @@
                     android:id="@+id/logout"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Logout"
+                    android:text="@string/sign_out"
                     android:layout_marginBottom="@dimen/_16sdp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"

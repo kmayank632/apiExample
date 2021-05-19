@@ -1,6 +1,8 @@
 <resources>
     <string name="app_name">Api Example</string>
-    <!-- TODO: Remove or change this placeholder text -->
+
+    <!-- TODO Remove Unwanted String and Make Packages -->
+
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="unique_id">Register Email</string>
     <string name="unique_id_hint">Enter your register email</string>
@@ -241,6 +243,13 @@
     <string name="firm_address_line_1">Address line 1</string>
     <string name="logout">Logout</string>
     <string name="failed_to_get_open_file_base_url">failed</string>
+    <string name="medoplus_id">Medoplus Id</string>
+    <string name="profile_date">25-02-2021</string>
+    <string name="Profile_blood_group">B+</string>
+    <string name="damon">Damon</string>
+    <string name="health_insurance_provider">Health insurance provider</string>
+    <string name="empty">Empty</string>
+    <string name="phn">8449701684</string>
 
     <!-- Business Items -->
     <string-array name="business_items">

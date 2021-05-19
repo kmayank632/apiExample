@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
+
+    <!-- TODO Remove Unwanted String and Make Packages -->
     <dimen name="small_text">@dimen/_8ssp</dimen>
     <dimen name="regular_text">@dimen/_10sdp</dimen>
     <dimen name="medium_text">@dimen/_12sdp</dimen>

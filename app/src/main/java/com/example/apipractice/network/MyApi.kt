@@ -1,6 +1,5 @@
 package com.example.apipractice.network
 
-import com.example.apipractice.MyIntercepter
 import com.example.apipractice.datamodel.LoginModel
 import com.example.apipractice.datamodel.ProfileModel
 import com.google.gson.JsonObject
@@ -16,18 +15,21 @@ interface MyApi {
 
     /** Check Login Data */
     @POST("${PATH}login/medoplus")
-    fun useLogin( @Body jsonObject: JsonObject): Call<LoginModel>
+    fun useLogin(@Body jsonObject: JsonObject): Call<LoginModel>
 
     /** Check Login Data */
     @GET("${PATH}patient/profile")
     fun getProfile(): Call<ProfileModel>
 
-    companion object{
+    companion object {
         const val PATH = "auth/"
-        val client = OkHttpClient.Builder().apply {
+
+        //TODO Move to another package
+        private val client = OkHttpClient.Builder().apply {
             addInterceptor(MyIntercepter())
         }.build()
-        operator fun invoke() : MyApi{
+
+        operator fun invoke(): MyApi {
             return Retrofit.Builder()
                 .baseUrl("https://stage.api.medoplus.org/")
                 .client(client)

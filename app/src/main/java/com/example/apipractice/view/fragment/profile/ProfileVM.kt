@@ -1,19 +1,17 @@
-package com.example.apipractice.profile
+package com.example.apipractice.view.fragment.profile
 
-import android.content.ContentValues
 import android.content.ContentValues.TAG
 import android.util.Log
 import androidx.databinding.ObservableBoolean
 import androidx.databinding.ObservableField
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.apipractice.application.DateFormatUtils
+import com.example.apipractice.utills.DateFormatUtils
 import com.example.apipractice.datamodel.DataValue
 import com.example.apipractice.datamodel.ProfileData
 import com.example.apipractice.datamodel.ProfileModel
 import com.example.apipractice.datamodel.ServicesDataList
 import com.example.apipractice.network.MyApi
-import com.example.apipractice.network.ProfileListner
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -24,7 +22,7 @@ class ProfileVM : ViewModel() {
     /* Data Members */
     var profileData: ProfileData? = null
 
-
+    //TODO Remove Warnings and Write Proper Comments
     /* Ui Fields */
     val visible = ObservableBoolean(false)
     val profilePictureField = ObservableField("")
@@ -41,7 +39,6 @@ class ProfileVM : ViewModel() {
     val healthCoverageField = ObservableField(false)
     val healthProviderField = ObservableField("")
     val healthPolicyNumberField = ObservableField("")
-    var authListner: ProfileListner? = null
     val loginResponse = MutableLiveData<ProfileModel>()
 
     fun getProfileData() {

@@ -1,9 +1,10 @@
-package com.example.apipractice.application
+package com.example.apipractice.utills
 
 import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.util.*
 
+//TODO Move Utils Classes to Similar package
 class DateFormatUtils {
 
     /* Some Date and time Formats */

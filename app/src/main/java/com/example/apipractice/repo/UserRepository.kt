@@ -12,6 +12,7 @@ import retrofit2.Response
 class UserRepository {
 
     fun userLogin(jsonObject: JsonObject): LiveData<LoginModel> {
+
         val loginResponse = MutableLiveData<LoginModel>()
         val responsee = MutableLiveData<String>()
 
@@ -20,6 +21,8 @@ class UserRepository {
                 override fun onResponse(call: Call<LoginModel>, response: Response<LoginModel>) {
                     if (response.isSuccessful) {
                         if (response.body() != null ) {
+
+                            //TODO Use postValue() Function
                             loginResponse.value = response.body()
                         }
                     } else {

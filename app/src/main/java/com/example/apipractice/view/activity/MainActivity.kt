@@ -1,4 +1,4 @@
-package com.example.apipractice
+package com.example.apipractice.view.activity
 
 import android.content.ContentValues.TAG
 import android.os.Bundle
@@ -8,15 +8,17 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.asLiveData
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
+import com.example.apipractice.R
 import com.example.apipractice.application.MyApplication
-import com.example.apipractice.application.StorePreferencesss
 import com.example.apipractice.databinding.ActivityMainBinding
+import com.example.apipractice.utills.StorePreferencesss
 
+//TODO Remove Warnings and Write Proper Comments
 class MainActivity : AppCompatActivity() {
     lateinit var binding: ActivityMainBinding
     lateinit var navController: NavController
     lateinit var storePreferencesss: StorePreferencesss
-    var token=""
+    var token = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,16 +29,17 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun observeData() {
-        val app=MyApplication()
-        app.getApplication()
-        storePreferencesss.getToken.asLiveData().observe(this, {
-            app.setToken(it)
-            token=it
-        })
-        storePreferencesss.getUser.asLiveData().observe(this, {
-            app.setUserType(it)
-            Log.e(TAG,"profileee ${app.getUserType()}")
 
-        })
+        val app = MyApplication.getApplication()
+        storePreferencesss.readValue(StorePreferencesss.Tokenn).asLiveData().observe(this,
+            {
+                app.setToken(it)
+            }
+        )
+        storePreferencesss.readValue(StorePreferencesss.User).asLiveData().observe(this,
+            {
+                app.setUserType(it)
+            }
+        )
     }
 }
