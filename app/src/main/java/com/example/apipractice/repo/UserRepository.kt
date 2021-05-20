@@ -1,8 +1,11 @@
 package com.example.apipractice.repo
 
+import android.content.ContentValues
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.apipractice.datamodel.LoginModel
+import com.example.apipractice.datamodel.ProfileModel
 import com.example.apipractice.network.MyApi
 import com.google.gson.JsonObject
 import retrofit2.Call
@@ -38,6 +41,56 @@ class UserRepository {
             })
 
         return loginResponse
+    }
+
+    fun updateProfile(jsonObject: JsonObject): LiveData<ProfileModel> {
+
+        val loginResponse = MutableLiveData<ProfileModel>()
+
+        MyApi().updateUserProfile(jsonObject)
+            .enqueue(object : Callback<ProfileModel> {
+                override fun onResponse(call: Call<ProfileModel>, response: Response<ProfileModel>) {
+                    if (response.isSuccessful) {
+                        if (response.body() != null ) {
+
+                             loginResponse.postValue(response.body())
+
+                        }
+
+                    }
+                }
+
+                override fun onFailure(call: Call<ProfileModel>, t: Throwable) {
+
+                }
+
+            })
+
+        return loginResponse
+    }
+
+    fun getProfile(): LiveData<ProfileModel> {
+        val loginResponse = MutableLiveData<ProfileModel>()
+
+        MyApi().getProfile()
+            .enqueue(object : Callback<ProfileModel> {
+                override fun onResponse(
+                    call: Call<ProfileModel>,
+                    response: Response<ProfileModel>
+                ) {
+                    if (response.isSuccessful) {
+                        loginResponse.value = response.body()
+                    }
+                }
+
+
+                override fun onFailure(call: Call<ProfileModel>, t: Throwable) {
+
+                }
+
+            })
+        return loginResponse
+
     }
 
 }

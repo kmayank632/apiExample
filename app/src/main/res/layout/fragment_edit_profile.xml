@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.example.apipractice.view.fragment.editprofile.EditProfileVM" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/scrollView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fillViewport="true">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp">
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/basicDetailTextView"
+                    style="@style/TextViewStyle.MEDIUM"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_16sdp"
+                    android:background="@color/skyBlue"
+                    android:padding="@dimen/_4sdp"
+                    android:text="@string/edit_profile"
+                    android:textAlignment="center"
+                    android:textColor="@color/colorWhite"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/layoutConstraint"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/_16sdp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/basicDetailTextView">
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/firstNameTextView"
+                        style="@style/TextViewStyle"
+                        android:layout_marginTop="@dimen/_5sdp"
+                        android:text="@string/first_name"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/firstNameEditText"
+                        style="@style/EditTextStyle"
+                        android:hint="@string/first_name_edit_text"
+                        android:inputType="textPersonName"
+                        android:text="@={viewModel.firstNameField}"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/firstNameTextView"
+                        app:setError="@{viewModel.isValidFirstName}" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/lastNameTextView"
+                        style="@style/TextViewStyle"
+                        android:layout_marginTop="@dimen/_5sdp"
+                        android:text="@string/last_name"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/firstNameEditText" />
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/lastNameEditText"
+                        style="@style/EditTextStyle"
+                        android:hint="@string/last_name_edit_text"
+                        android:inputType="textPersonName"
+                        android:text="@={viewModel.lastNameField}"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="@id/lastNameTextView"
+                        app:layout_constraintTop_toBottomOf="@id/lastNameTextView"
+                        app:setError="@{viewModel.isValidLastName}" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/genderTextView"
+                        style="@style/TextViewStyle"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:text="@string/gender"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/lastNameEditText" />
+
+                    <RadioGroup
+                        android:id="@+id/radioGroup"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:checkedButton="@={viewModel.radiochecked}"
+                        android:orientation="horizontal"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/genderTextView">
+
+                        <RadioButton
+                            android:id="@+id/radioMale"
+                            style="@style/RadioButtonStyle"
+                            android:layout_width="wrap_content"
+                            android:button="@drawable/male_btn_radio"
+                            android:padding="@dimen/_4sdp"
+                            android:text="@string/male" />
+
+                        <RadioButton
+                            android:id="@+id/radioFemale"
+                            style="@style/RadioButtonStyle"
+                            android:layout_width="wrap_content"
+                            android:button="@drawable/female_btn_radio"
+                            android:padding="@dimen/_4sdp"
+                            android:text="@string/female" />
+
+                        <RadioButton
+                            android:id="@+id/radioTransgender"
+                            style="@style/RadioButtonStyle"
+                            android:layout_width="wrap_content"
+                            android:button="@drawable/transgender_btn_radio"
+                            android:padding="@dimen/_4sdp"
+                            android:text="@string/transgender" />
+
+                    </RadioGroup>
+
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/firstAlternateNoTextView"
+                        style="@style/TextViewStyle"
+                        android:layout_marginTop="@dimen/_5sdp"
+                        android:text="@string/first_alternate_no_text"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/radioGroup" />
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/firstAlternateNoEditText"
+                        style="@style/EditTextStyle"
+                        android:hint="@string/altenate_pjone_no_1_hint"
+                        android:inputType="number"
+                        android:text="@={viewModel.alternatePhoneFirstNumberField}"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/firstAlternateNoTextView"
+                        app:setError="@{viewModel.isValidAlternatePhoneNumberFirst}" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/secondAlternateNoTextView"
+                        style="@style/TextViewStyle"
+                        android:layout_marginTop="@dimen/_5sdp"
+                        android:text="@string/second_alternate_no_text"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/firstAlternateNoEditText" />
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/secondAlternateNoEditText"
+                        style="@style/EditTextStyle"
+                        android:hint="@string/altenate_pjone_no_2_hint"
+                        android:inputType="number"
+                        android:text="@={viewModel.alternatePhoneSecondNumberField}"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/secondAlternateNoTextView"
+                        app:setError="@{viewModel.isValidAlternatePhoneNumberSecond}" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/cancelButton"
+                        style="@style/ButtonStyle.Outline.Red"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:layout_marginEnd="@dimen/_10sdp"
+                        android:text="@string/cancel"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toStartOf="@+id/updateButton"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/secondAlternateNoEditText" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/updateButton"
+                        style="@style/ButtonStyle"
+                        android:text="@string/update"
+                        app:layout_constraintBaseline_toBaselineOf="@id/cancelButton"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/cancelButton"
+                        app:layout_constraintTop_toTopOf="@id/cancelButton" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.core.widget.NestedScrollView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

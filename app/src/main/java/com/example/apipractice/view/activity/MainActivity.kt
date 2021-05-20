@@ -1,8 +1,6 @@
 package com.example.apipractice.view.activity
 
-import android.content.ContentValues.TAG
 import android.os.Bundle
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.asLiveData
@@ -31,7 +29,7 @@ class MainActivity : AppCompatActivity() {
     fun observeData() {
 
         val app = MyApplication.getApplication()
-        storePreferencesss.readValue(StorePreferencesss.Tokenn).asLiveData().observe(this,
+        storePreferencesss.readValue(StorePreferencesss.Token).asLiveData().observe(this,
             {
                 app.setToken(it)
             }
@@ -41,5 +39,13 @@ class MainActivity : AppCompatActivity() {
                 app.setUserType(it)
             }
         )
+        storePreferencesss.readValue(StorePreferencesss.DEMAND_PROFILE_DATA).asLiveData()
+            .observe(this,
+                {
+                    if (it != null) {
+                        app.setProfileData(it)
+                    }
+                }
+            )
     }
 }

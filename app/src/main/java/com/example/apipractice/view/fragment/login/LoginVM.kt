@@ -1,10 +1,9 @@
 package com.example.apipractice.view.fragment.login
 
-import android.content.ContentValues.TAG
-import android.util.Log
 import androidx.databinding.ObservableBoolean
 import androidx.databinding.ObservableField
 import androidx.lifecycle.ViewModel
+import com.example.apipractice.application.MyApplication
 import com.example.apipractice.basemodel.BaseModel
 import com.example.apipractice.network.AuthListner
 import com.example.apipractice.repo.UserRepository
@@ -19,6 +18,8 @@ class LoginVM : ViewModel() {
     val isValidUsername = ObservableField(BaseModel(true))
     val isValidPassword = ObservableField(BaseModel(true))
     val visible = ObservableBoolean(false)
+    val app = MyApplication.getApplication()
+
 
     var authListner: AuthListner? = null
 

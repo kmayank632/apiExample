@@ -12,4 +12,17 @@ object Constants {
             val DIAGNOSTIC = "DIAGNOSTIC"
         }
     }
+
+    /** Gender Type Keys
+     *
+     * These Keys are dependent of Configuration defined by Backend in APIs
+     * Don't Change it without permission
+     * */
+    interface GENDER {
+        companion object {
+            const val MALE = "MALE"
+            const val FEMALE = "FEMALE"
+            const val TRANSGENDER = "TRANSGENDER"
+        }
+    }
 }

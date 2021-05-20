@@ -5,11 +5,13 @@ import com.example.apipractice.datamodel.ProfileModel
 import com.google.gson.JsonObject
 import okhttp3.OkHttpClient
 import retrofit2.Call
+import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.POST
+import retrofit2.http.PUT
 
 interface MyApi {
 
@@ -20,6 +22,10 @@ interface MyApi {
     /** Check Login Data */
     @GET("${PATH}patient/profile")
     fun getProfile(): Call<ProfileModel>
+
+    /** Update profile User Data */
+    @PUT("${PATH}patient/profile")
+    fun updateUserProfile(@Body jsonObject: JsonObject): Call<ProfileModel>
 
     companion object {
         const val PATH = "auth/"

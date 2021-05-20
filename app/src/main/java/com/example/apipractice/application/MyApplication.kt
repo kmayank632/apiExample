@@ -6,6 +6,7 @@ import android.content.Context
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.multidex.MultiDex
+import com.example.apipractice.datamodel.ProfileData
 
 //TODO Proper Commenting on Methods with Parameters
 //TODO Make All Data Classes Parcelable and use @Keep Annotation (if not used)
@@ -14,10 +15,11 @@ class MyApplication : Application() {
     lateinit var currentActivity: AppCompatActivity
 
 
-
     private var logintoken: String = ""
 
     private var loginuserType: String? = ""
+
+    private var userProfileData: ProfileData? = null
 
     companion object {
 
@@ -81,4 +83,9 @@ class MyApplication : Application() {
 
     fun getUserType() = loginuserType
 
+    fun setProfileData(profileData: ProfileData) {
+        userProfileData = profileData
+    }
+
+    fun getProfileData() = userProfileData
 }

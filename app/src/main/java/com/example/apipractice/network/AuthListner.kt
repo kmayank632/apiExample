@@ -11,3 +11,7 @@ import com.example.apipractice.datamodel.ProfileModel
 interface AuthListner {
     fun onSuccess(loginResponse: LiveData<LoginModel>)
 }
+/** Use for Login api success response */
+interface ProfileListener {
+    fun onSuccess(loginResponse: LiveData<ProfileModel>)
+}

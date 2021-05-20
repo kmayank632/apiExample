@@ -1,26 +1,25 @@
 package com.example.apipractice.view.fragment.profile
 
-import android.content.ContentValues.TAG
-import android.util.Log
 import androidx.databinding.ObservableBoolean
 import androidx.databinding.ObservableField
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.apipractice.utills.DateFormatUtils
+import com.example.apipractice.application.MyApplication
 import com.example.apipractice.datamodel.DataValue
 import com.example.apipractice.datamodel.ProfileData
 import com.example.apipractice.datamodel.ProfileModel
 import com.example.apipractice.datamodel.ServicesDataList
-import com.example.apipractice.network.MyApi
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
+import com.example.apipractice.network.ProfileListener
+import com.example.apipractice.repo.UserRepository
+import com.example.apipractice.utills.DateFormatUtils
+import com.example.apipractice.utills.StorePreferencesss
 
 
 class ProfileVM : ViewModel() {
 
     /* Data Members */
     var profileData: ProfileData? = null
+    val app = MyApplication.getApplication()
 
     //TODO Remove Warnings and Write Proper Comments
     /* Ui Fields */
@@ -34,35 +33,20 @@ class ProfileVM : ViewModel() {
     val phoneNumberField = ObservableField("")
     val bloodGroup = ObservableField("")
 
-    /* Health Profile */
+    /** Health Profile */
     val healthIssuesField = ObservableField("")
     val healthCoverageField = ObservableField(false)
     val healthProviderField = ObservableField("")
     val healthPolicyNumberField = ObservableField("")
-    val loginResponse = MutableLiveData<ProfileModel>()
+    var listener: ProfileListener? = null
+
 
     fun getProfileData() {
-      visible.set(true)
-        MyApi().getProfile()
-            .enqueue(object : Callback<ProfileModel> {
-                override fun onResponse(
-                    call: Call<ProfileModel>,
-                    response: Response<ProfileModel>
-                ) {
-                    if (response.isSuccessful) {
-                        loginResponse.value = response.body()
-                        response.body()?.data?.let { setUIData(it) }
-                        Log.e(TAG, "profile ${response.body()}")
-
-                    }
-                }
-
-                override fun onFailure(call: Call<ProfileModel>, t: Throwable) {
-
-                }
-
-            })
+        visible.set(true)
+        val loginResponse = UserRepository().getProfile()
+        listener?.onSuccess(loginResponse)
         visible.set(false)
+
     }
 
 

@@ -25,14 +25,10 @@ import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
-//TODO Move Packages and Classes to Similar package like views > fragment > auth > login etc
-//TODO Remove Warnings and Write Proper Comments
-
 class LoginFragment : Fragment(), AuthListner {
 
     lateinit var binding: FragmentLoginBinding
     lateinit var viewModel: LoginVM
-    val app = MyApplication()
     lateinit var storePreferencesss: StorePreferencesss
 
 
@@ -54,6 +50,7 @@ class LoginFragment : Fragment(), AuthListner {
         super.onViewCreated(view, savedInstanceState)
         storePreferencesss = StorePreferencesss(requireContext())
 
+        /** Logout Successfully snackbar */
         when (arguments?.getString(Constants.KEY)) {
             LOGOUT ->
                 Snackbar.make(
@@ -77,6 +74,8 @@ class LoginFragment : Fragment(), AuthListner {
         loginResponse.observe(this, Observer {
 
             //TODO Use Coroutines in ViewModel
+
+            /** Store Token in DataStore*/
             GlobalScope.launch {
                 it.data?.token?.let { it1 ->
                     storePreferencesss.storeValue(
@@ -84,6 +83,9 @@ class LoginFragment : Fragment(), AuthListner {
                         it1
                     )
                 }
+                viewModel.app.setToken(it.data?.token)
+
+                /** Store useType in DataStore*/
                 it.data?.userType?.let { it1 ->
                     storePreferencesss.storeValue(
                         StorePreferencesss.User,
@@ -92,6 +94,8 @@ class LoginFragment : Fragment(), AuthListner {
                 }
             }
             Log.e(TAG, "response $it")
+
+            /** Toast Message*/
             Toast.makeText(
                 requireContext(),
                 it.message,

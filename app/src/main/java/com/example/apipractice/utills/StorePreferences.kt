@@ -1,6 +1,5 @@
 package com.example.apipractice.utills
 
-
 import android.content.Context
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
@@ -8,42 +7,43 @@ import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.emptyPreferences
 import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.datastore.preferences.createDataStore
+import com.example.apipractice.datamodel.ProfileData
+import com.google.gson.Gson
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.map
 import java.io.IOException
+import javax.inject.Singleton
 
-//TODO Move Utils Classes to Similar package
-//TODO Take care of Spellings
-//TODO Try make common methods to perform similar type of Jobs
-//TODO Key values via CONSTANT variables
-class StorePreferencesss(context: Context) {
+@Singleton
+class StorePreferencesss constructor(context: Context) {
 
-
-
-    private val dataStore = context.createDataStore(name = "apiexample")
-    /** Preference Keys For Global Settings */
-    companion object StoreConfigPreferenceKeys {
-        var Token = stringPreferencesKey("LOGIN_DATA_Token")
-        var Tokenn = stringPreferencesKey("LOGIN_DATA_Tokenn")
-        var User = stringPreferencesKey("USER_TYPE")
-    }
+    val dataStore: DataStore<Preferences> = context.createDataStore(
+        name = "MedoPlus"
+    )
 
     /** Store Any Any with Key */
-    suspend  fun <T : Any> storeValue(key: Preferences.Key<T>, value: T) {
+    suspend inline fun <T : Any> storeValue(key: Preferences.Key<T>, value: T) {
         dataStore.edit {
             it[key] = value
         }
     }
 
+    /** Store Any Object with Key */
+    suspend inline fun <reified T : Any> storeValue(PreferencesPair: Pair<String, T>, value: T) {
+        dataStore.edit {
+            it[stringPreferencesKey(PreferencesPair.first)] = Gson().toJson(value)
+        }
+    }
+
     /** Get Stored Any with Key */
-     fun <T : Any> readValue(
+    fun <T : Any> readValue(
         key: Preferences.Key<T>
     ): Flow<T?> {
         return dataStore.getFromLocalStorageAny(key)
     }
 
-     fun <T : Any> DataStore<Preferences>.getFromLocalStorageAny(
+    fun <T : Any> DataStore<Preferences>.getFromLocalStorageAny(
         PreferencesKey: Preferences.Key<T>
     ) =
         data.catch {
@@ -56,4 +56,37 @@ class StorePreferencesss(context: Context) {
             it[PreferencesKey]
         }
 
+    /** Get Stored Object with Key */
+    inline fun <reified T> readValue(
+        key: Pair<String, T>
+    ): Flow<T?> {
+        return dataStore.getFromLocalStorage(key)
+    }
+
+    inline fun <reified T> DataStore<Preferences>.getFromLocalStorage(
+        PreferencesPair: Pair<String, T>
+    ) =
+        data.catch {
+            if (it is IOException) {
+                emit(emptyPreferences())
+            } else {
+                throw it
+            }
+        }.map {
+            val jsonString = it[stringPreferencesKey(PreferencesPair.first)]
+            try {
+                Gson().fromJson(jsonString, T::class.java)
+            } catch (exception: Exception) {
+                null
+            }
+        }
+
+    /** Preference Keys For Global Settings */
+    companion object StoreConfigPreferenceKeys {
+        var Token = stringPreferencesKey("LOGIN_DATA_Token")
+        var User = stringPreferencesKey("USER_TYPE")
+        var DEMAND_PROFILE_DATA = Pair("DEMAND_PROFILE_DATA", ProfileData())
+
+    }
 }
+

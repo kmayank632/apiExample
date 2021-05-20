@@ -65,7 +65,7 @@
     <string name="health_insurance_detail">Health Insurance Details</string>
     <string name="health_insurance_coverage">Health insurance coverage</string>
     <string name="health_insurance_company_name">Health insurance company name</string>
-    <string name="health_insurance_policy_no">Health insurance policy number</string>
+    <string name="health_insurance_policy_no">Health insurance policy no.</string>
     <string name="upload_health_insurance_card_policy">Upload health insurance Card/policy</string>
     <string name="health_profile">Health Profile</string>
     <string name="existing_health_issues">Existing health isuues</string>
