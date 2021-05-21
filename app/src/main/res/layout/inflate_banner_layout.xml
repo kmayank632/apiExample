@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="data"
+            type="com.example.apipractice.view.fragment.home.BannerHomeItemViewModel" />
+
+    </data>
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/bannerImage"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_150sdp"
+        imageurl="@{data.bannerImage.en}">
+
+    </androidx.appcompat.widget.AppCompatImageView>
+
+
+</layout>

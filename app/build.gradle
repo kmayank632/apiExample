@@ -2,6 +2,8 @@ plugins {
     id 'com.android.application'
     id 'kotlin-android'
     id 'kotlin-kapt'
+    id "kotlin-parcelize"
+
 }
 
 android {
@@ -68,6 +70,8 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-livedata-ktx:2.3.1"
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.1"
     implementation "androidx.activity:activity-ktx:1.2.2"
+
+    implementation "ru.tinkoff.scrollingpagerindicator:scrollingpagerindicator:1.0.6"
 
     /** facebook   */
     implementation 'com.facebook.android:facebook-android-sdk:5.15.3'

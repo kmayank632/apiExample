@@ -1,6 +1,8 @@
 package com.example.apipractice.view.activity
 
 import android.os.Bundle
+import android.view.MenuItem
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.asLiveData
@@ -10,13 +12,13 @@ import com.example.apipractice.R
 import com.example.apipractice.application.MyApplication
 import com.example.apipractice.databinding.ActivityMainBinding
 import com.example.apipractice.utills.StorePreferencesss
+import com.google.android.material.bottomnavigation.BottomNavigationView
 
 //TODO Remove Warnings and Write Proper Comments
 class MainActivity : AppCompatActivity() {
     lateinit var binding: ActivityMainBinding
     lateinit var navController: NavController
     lateinit var storePreferencesss: StorePreferencesss
-    var token = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -24,6 +26,8 @@ class MainActivity : AppCompatActivity() {
         storePreferencesss = StorePreferencesss(this)
         observeData()
         navController = Navigation.findNavController(this, R.id.fragment_container)
+        binding.bottomNavigation.setOnNavigationItemSelectedListener(navListener)
+
     }
 
     fun observeData() {
@@ -47,5 +51,34 @@ class MainActivity : AppCompatActivity() {
                     }
                 }
             )
+
+
     }
+
+    private val navListener: BottomNavigationView.OnNavigationItemSelectedListener =
+        object : BottomNavigationView.OnNavigationItemSelectedListener {
+            override fun onNavigationItemSelected(item: MenuItem): Boolean {
+
+                when (item.itemId) {
+                    R.id.home ->
+                        if (navController.currentDestination?.id != R.id.homeFragment) {
+                            navController
+                                .navigate(R.id.homeFragment)
+                            return true
+                        }
+                    R.id.myProfile ->
+                        if (navController.currentDestination?.id != R.id.profileFragment) {
+                            navController
+                                .navigate(R.id.profileFragment)
+                            return true
+                        }
+
+
+                }
+                return true
+
+            }
+
+        }
+
 }

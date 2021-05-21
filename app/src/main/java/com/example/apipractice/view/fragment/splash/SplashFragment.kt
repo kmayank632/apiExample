@@ -42,7 +42,7 @@ class SplashFragment : Fragment() {
             if ( it == Constants.USER_TYPE.PATIENT) {
 
                 Handler(Looper.getMainLooper()).postDelayed({
-                    findNavController().navigate(R.id.action_splashFragment_to_profileFragment)
+                    findNavController().navigate(R.id.action_splashFragment_to_homeFragment)
                 }, 2000)
             }
             else{

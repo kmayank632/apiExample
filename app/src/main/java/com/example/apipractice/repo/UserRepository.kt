@@ -4,6 +4,7 @@ import android.content.ContentValues
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.example.apipractice.datamodel.BannerListModel
 import com.example.apipractice.datamodel.LoginModel
 import com.example.apipractice.datamodel.ProfileModel
 import com.example.apipractice.network.MyApi
@@ -75,6 +76,7 @@ class UserRepository {
         MyApi().getProfile()
             .enqueue(object : Callback<ProfileModel> {
                 override fun onResponse(
+
                     call: Call<ProfileModel>,
                     response: Response<ProfileModel>
                 ) {
@@ -85,6 +87,32 @@ class UserRepository {
 
 
                 override fun onFailure(call: Call<ProfileModel>, t: Throwable) {
+
+                }
+
+            })
+        return loginResponse
+
+    }
+
+
+    fun getBanner(): LiveData<BannerListModel> {
+        val loginResponse = MutableLiveData<BannerListModel>()
+
+        MyApi().getBannerList()
+            .enqueue(object : Callback<BannerListModel> {
+                override fun onResponse(
+
+                    call: Call<BannerListModel>,
+                    response: Response<BannerListModel>
+                ) {
+                    if (response.isSuccessful) {
+                        loginResponse.value = response.body()
+                    }
+                }
+
+
+                override fun onFailure(call: Call<BannerListModel>, t: Throwable) {
 
                 }
 

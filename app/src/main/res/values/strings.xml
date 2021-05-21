@@ -250,6 +250,7 @@
     <string name="health_insurance_provider">Health insurance provider</string>
     <string name="empty">Empty</string>
     <string name="phn">8449701684</string>
+    <string name="home">Home</string>
 
     <!-- Business Items -->
     <string-array name="business_items">

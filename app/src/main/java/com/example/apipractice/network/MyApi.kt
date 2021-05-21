@@ -1,5 +1,6 @@
 package com.example.apipractice.network
 
+import com.example.apipractice.datamodel.BannerListModel
 import com.example.apipractice.datamodel.LoginModel
 import com.example.apipractice.datamodel.ProfileModel
 import com.google.gson.JsonObject
@@ -27,8 +28,13 @@ interface MyApi {
     @PUT("${PATH}patient/profile")
     fun updateUserProfile(@Body jsonObject: JsonObject): Call<ProfileModel>
 
+    /** Get Banner List Data */
+    @POST("cms/public/banner-listing")
+    fun getBannerList(): Call<BannerListModel>
+
     companion object {
         const val PATH = "auth/"
+        const val CMSPATH = "cms/"
 
         //TODO Move to another package
         private val client = OkHttpClient.Builder().apply {
@@ -44,4 +50,5 @@ interface MyApi {
                 .create(MyApi::class.java)
         }
     }
+
 }

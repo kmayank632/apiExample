@@ -1,13 +1,18 @@
 package com.example.apipractice.custombinding
 
+import android.graphics.drawable.Drawable
 import android.text.method.ScrollingMovementMethod
 import android.view.View
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.annotation.DrawableRes
+import androidx.core.content.ContextCompat
 import androidx.databinding.BindingAdapter
+import androidx.swiperefreshlayout.widget.CircularProgressDrawable
 import com.bumptech.glide.Glide
 import com.bumptech.glide.Priority
+import com.bumptech.glide.RequestBuilder
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
@@ -35,7 +40,6 @@ class CustomBindings {
                 }
             }
         }
-
 
         @BindingAdapter("imageurl")
         @JvmStatic

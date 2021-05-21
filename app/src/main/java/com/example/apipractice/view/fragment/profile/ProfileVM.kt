@@ -130,7 +130,7 @@ class ProfileVM : ViewModel() {
 
         data.pictures?.let {
             if (it.isNotEmpty()) {
-                profilePictureField.set(it[0].preview)
+                profilePictureField.set(it[0].preview.toString())
             }
         }
     }

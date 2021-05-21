@@ -103,7 +103,7 @@ class LoginFragment : Fragment(), AuthListner {
             ).show()
 
             if (it.data?.userType == Constants.USER_TYPE.PATIENT) {
-                findNavController().navigate(R.id.action_loginFragment_to_profileFragment)
+                findNavController().navigate(R.id.action_loginFragment_to_homeFragment)
             }
         })
     }

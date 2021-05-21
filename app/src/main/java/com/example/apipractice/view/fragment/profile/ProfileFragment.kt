@@ -49,9 +49,15 @@ class ProfileFragment : Fragment(), ProfileListener {
     }
 
 
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        activity?.setTitle(R.string.profile)
+
         storePreferencesss = StorePreferencesss(requireContext())
+
+        /** set profile data from dataStore*/
+        viewModel.app.getProfileData()?.let { viewModel.setUIData(it) }
 
         /*** Profile updated Snackbar */
         when (arguments?.getString(KEY)) {
