@@ -1,13 +1,14 @@
 package com.example.apipractice.repo
 
-import android.content.ContentValues
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.example.apipractice.datamodel.BannerListModel
+import com.example.apipractice.application.MyApplication
 import com.example.apipractice.datamodel.LoginModel
 import com.example.apipractice.datamodel.ProfileModel
-import com.example.apipractice.network.MyApi
+import com.example.apipractice.network.NetworkModule
+import com.example.apipractice.utills.StorePreferences
+import com.example.apipractice.view.listener.ResourceProvider
 import com.google.gson.JsonObject
 import retrofit2.Call
 import retrofit2.Callback
@@ -15,27 +16,23 @@ import retrofit2.Response
 
 class UserRepository {
 
+    /** Login API Response*/
     fun userLogin(jsonObject: JsonObject): LiveData<LoginModel> {
 
         val loginResponse = MutableLiveData<LoginModel>()
-        val responsee = MutableLiveData<String>()
 
-        MyApi().useLogin(jsonObject)
+        NetworkModule.retrofit.useLogin(jsonObject)
             .enqueue(object : Callback<LoginModel> {
                 override fun onResponse(call: Call<LoginModel>, response: Response<LoginModel>) {
                     if (response.isSuccessful) {
-                        if (response.body() != null ) {
-
-                            //TODO Use postValue() Function
-                            loginResponse.value = response.body()
+                        if (response.body() != null) {
+                            loginResponse.postValue(response.body())
+                            /** Store UseType in DataStore*/
                         }
-                    } else {
-                        responsee.value = response.errorBody().toString()
                     }
                 }
 
                 override fun onFailure(call: Call<LoginModel>, t: Throwable) {
-                    responsee.value = t.message.toString()
 
                 }
 
@@ -44,17 +41,21 @@ class UserRepository {
         return loginResponse
     }
 
+    /** Update Profile API Response*/
     fun updateProfile(jsonObject: JsonObject): LiveData<ProfileModel> {
 
         val loginResponse = MutableLiveData<ProfileModel>()
 
-        MyApi().updateUserProfile(jsonObject)
+        NetworkModule.retrofit.updateUserProfile(jsonObject)
             .enqueue(object : Callback<ProfileModel> {
-                override fun onResponse(call: Call<ProfileModel>, response: Response<ProfileModel>) {
+                override fun onResponse(
+                    call: Call<ProfileModel>,
+                    response: Response<ProfileModel>
+                ) {
                     if (response.isSuccessful) {
-                        if (response.body() != null ) {
+                        if (response.body() != null) {
 
-                             loginResponse.postValue(response.body())
+                            loginResponse.postValue(response.body())
 
                         }
 
@@ -70,10 +71,11 @@ class UserRepository {
         return loginResponse
     }
 
+    /** Get Profile API Response*/
     fun getProfile(): LiveData<ProfileModel> {
         val loginResponse = MutableLiveData<ProfileModel>()
 
-        MyApi().getProfile()
+        NetworkModule.retrofit.getProfile()
             .enqueue(object : Callback<ProfileModel> {
                 override fun onResponse(
 
@@ -81,38 +83,12 @@ class UserRepository {
                     response: Response<ProfileModel>
                 ) {
                     if (response.isSuccessful) {
-                        loginResponse.value = response.body()
+                        loginResponse.postValue(response.body())
                     }
                 }
 
 
                 override fun onFailure(call: Call<ProfileModel>, t: Throwable) {
-
-                }
-
-            })
-        return loginResponse
-
-    }
-
-
-    fun getBanner(): LiveData<BannerListModel> {
-        val loginResponse = MutableLiveData<BannerListModel>()
-
-        MyApi().getBannerList()
-            .enqueue(object : Callback<BannerListModel> {
-                override fun onResponse(
-
-                    call: Call<BannerListModel>,
-                    response: Response<BannerListModel>
-                ) {
-                    if (response.isSuccessful) {
-                        loginResponse.value = response.body()
-                    }
-                }
-
-
-                override fun onFailure(call: Call<BannerListModel>, t: Throwable) {
 
                 }
 

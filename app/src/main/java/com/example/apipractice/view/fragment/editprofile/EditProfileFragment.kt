@@ -12,19 +12,17 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.apipractice.R
-import com.example.apipractice.application.MyApplication
-import com.example.apipractice.basemodel.Constants
 import com.example.apipractice.basemodel.Constants.KEY
 import com.example.apipractice.databinding.FragmentEditProfileBinding
 import com.example.apipractice.datamodel.ProfileModel
 import com.example.apipractice.network.ProfileListener
-import com.example.apipractice.view.fragment.profile.ProfileFragment
 
 class EditProfileFragment : Fragment(), ProfileListener {
-companion object{
-      val EDITPROFILE = "EDITPROFILE"
+    companion object {
+        val EDITPROFILE = "EDITPROFILE"
 
-}
+    }
+
     lateinit var binding: FragmentEditProfileBinding
     lateinit var viewModel: EditProfileVM
 
@@ -44,7 +42,11 @@ companion object{
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        /**Set UI Fields */
         viewModel.app.getProfileData()?.let { viewModel.setUiData(it) }
+
+        /**Call setClick Function*/
         setClick()
     }
 
@@ -61,10 +63,12 @@ companion object{
     /** Api Success*/
     override fun onSuccess(loginResponse: LiveData<ProfileModel>) {
         loginResponse.observe(this, Observer {
+
             val bundle = bundleOf().apply {
                 putString(KEY, EDITPROFILE)
             }
-            findNavController().navigate(R.id.action_editProfileFragment_to_profileFragment,bundle)
+            /**Navigate to Profile*/
+            findNavController().navigate(R.id.action_editProfileFragment_to_profileFragment, bundle)
         })
     }
 

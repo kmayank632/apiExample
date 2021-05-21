@@ -6,6 +6,7 @@ import kotlinx.parcelize.Parcelize
 
 @Parcelize
 @Keep
-data class MetaData(
-    val exists: Boolean?
+data class Url(
+    val en : String?,
+    val hi  :  String?
 ) : Parcelable

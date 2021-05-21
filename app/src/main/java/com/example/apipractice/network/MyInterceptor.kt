@@ -6,11 +6,12 @@ import com.example.apipractice.application.MyApplication
 import okhttp3.Interceptor
 import okhttp3.Response
 
-//TODO Remove Warnings and Write Proper Comments
-class MyIntercepter : Interceptor {
+class MyInterceptor : Interceptor {
 
     override fun intercept(chain: Interceptor.Chain): Response {
         val app = MyApplication.getApplication()
+
+        /** Set Header **/
         Log.e(TAG,"tokenheader ${app.getToken()}")
         val request = chain.request()
             .newBuilder()

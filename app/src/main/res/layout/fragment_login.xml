@@ -84,7 +84,6 @@
                 android:background="?android:attr/selectableItemBackground"
                 android:padding="@dimen/_4sdp"
                 android:visibility="gone"
-                android:text="@string/forgot_password"
                 android:textColor="@color/colorOnBlue"
                 app:layout_constraintBottom_toTopOf="@id/term_conditions_text_view"
                 app:layout_constraintEnd_toStartOf="@id/signUpTextView"
@@ -98,7 +97,6 @@
                 android:background="?android:attr/selectableItemBackground"
                 android:padding="@dimen/_4sdp"
                 android:visibility="gone"
-                android:text="@string/sign_up"
                 android:textColor="@color/colorOnBlue"
                 app:layout_constraintBaseline_toBaselineOf="@id/forgotPasswordTextView"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -130,7 +128,6 @@
                 style="@style/ButtonStyle.Outline"
                 android:layout_marginBottom="@dimen/_10sdp"
                 android:visibility="invisible"
-                android:text="@string/sign_in_using_phone_otp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"/>

@@ -2,27 +2,27 @@ package com.example.apipractice.view.fragment.profile
 
 import androidx.databinding.ObservableBoolean
 import androidx.databinding.ObservableField
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.apipractice.application.MyApplication
 import com.example.apipractice.datamodel.DataValue
 import com.example.apipractice.datamodel.ProfileData
-import com.example.apipractice.datamodel.ProfileModel
 import com.example.apipractice.datamodel.ServicesDataList
 import com.example.apipractice.network.ProfileListener
 import com.example.apipractice.repo.UserRepository
 import com.example.apipractice.utills.DateFormatUtils
-import com.example.apipractice.utills.StorePreferencesss
+import com.example.apipractice.view.listener.ResourceProvider
 
 
 class ProfileVM : ViewModel() {
 
-    /* Data Members */
+    /** Data Members */
     var profileData: ProfileData? = null
     val app = MyApplication.getApplication()
 
-    //TODO Remove Warnings and Write Proper Comments
-    /* Ui Fields */
+    /** Initialize ResourceProvider */
+    val resourceProvider: ResourceProvider = ResourceProvider(MyApplication.getApplication())
+
+    /** Ui Fields */
     val visible = ObservableBoolean(false)
     val profilePictureField = ObservableField("")
     val medoPlusIdField = ObservableField("")
@@ -40,11 +40,20 @@ class ProfileVM : ViewModel() {
     val healthPolicyNumberField = ObservableField("")
     var listener: ProfileListener? = null
 
-
+    /**
+     * Get Profile Data
+     * */
     fun getProfileData() {
+        /** Set Progress Bar Visibility Visible*/
         visible.set(true)
+
+        /** Call UserRepository Function */
         val loginResponse = UserRepository().getProfile()
+
+        /** Pass loginResponse to AuthListener */
         listener?.onSuccess(loginResponse)
+
+        /** Set Progress Bar Visibility Gone*/
         visible.set(false)
 
     }

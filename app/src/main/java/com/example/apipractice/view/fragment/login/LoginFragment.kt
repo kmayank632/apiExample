@@ -14,22 +14,21 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.apipractice.R
-import com.example.apipractice.application.MyApplication
 import com.example.apipractice.basemodel.Constants
 import com.example.apipractice.databinding.FragmentLoginBinding
 import com.example.apipractice.datamodel.LoginModel
-import com.example.apipractice.network.AuthListner
-import com.example.apipractice.utills.StorePreferencesss
+import com.example.apipractice.network.AuthListener
+import com.example.apipractice.utills.StorePreferences
 import com.example.apipractice.view.fragment.profile.ProfileFragment.Companion.LOGOUT
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
-class LoginFragment : Fragment(), AuthListner {
+class LoginFragment : Fragment(), AuthListener {
 
     lateinit var binding: FragmentLoginBinding
     lateinit var viewModel: LoginVM
-    lateinit var storePreferencesss: StorePreferencesss
+    lateinit var storePreferences: StorePreferences
 
 
     override fun onCreateView(
@@ -42,13 +41,15 @@ class LoginFragment : Fragment(), AuthListner {
         )
         viewModel = ViewModelProvider(this).get(LoginVM::class.java)
         binding.viewModel = viewModel
-        viewModel.authListner = this
+        viewModel.authListener = this
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        storePreferencesss = StorePreferencesss(requireContext())
+
+        /** Initialize DataStore*/
+        storePreferences = StorePreferences(requireContext())
 
         /** Logout Successfully snackbar */
         when (arguments?.getString(Constants.KEY)) {
@@ -56,7 +57,7 @@ class LoginFragment : Fragment(), AuthListner {
                 Snackbar.make(
                     requireContext(),
                     binding.layout,
-                    "Logout Successfully",
+                    viewModel.resourceProvider.getString(R.string.logout_successfully),
                     Snackbar.LENGTH_SHORT
                 ).show()
 
@@ -64,6 +65,7 @@ class LoginFragment : Fragment(), AuthListner {
         setClick()
     }
 
+    /** Set UI Clicks*/
     fun setClick() {
         binding.loginButton.setOnClickListener {
             viewModel.setLogin()
@@ -72,38 +74,46 @@ class LoginFragment : Fragment(), AuthListner {
 
     override fun onSuccess(loginResponse: LiveData<LoginModel>) {
         loginResponse.observe(this, Observer {
+            if (it.status == true) {
+                /** Store Token in DataStore*/
+                GlobalScope.launch {
+                    it.data?.token?.let { it1 ->
+                        storePreferences.storeValue(
+                            StorePreferences.Token,
+                            it1
+                        )
+                    }
+                    viewModel.app.setToken(it.data?.token)
 
-            //TODO Use Coroutines in ViewModel
-
-            /** Store Token in DataStore*/
-            GlobalScope.launch {
-                it.data?.token?.let { it1 ->
-                    storePreferencesss.storeValue(
-                        StorePreferencesss.Token,
-                        it1
-                    )
+                    /** Store UseType in DataStore*/
+                    it.data?.userType?.let { it1 ->
+                        storePreferences.storeValue(
+                            StorePreferences.User,
+                            it1
+                        )
+                    }
                 }
-                viewModel.app.setToken(it.data?.token)
+                Log.e(TAG, "response $it")
 
-                /** Store useType in DataStore*/
-                it.data?.userType?.let { it1 ->
-                    storePreferencesss.storeValue(
-                        StorePreferencesss.User,
-                        it1
-                    )
+                /** Toast Message*/
+                Toast.makeText(
+                    requireContext(),
+                    it.message,
+                    Toast.LENGTH_SHORT
+                ).show()
+
+                /** If User Type is patient*/
+                if (it.data?.userType == Constants.USER_TYPE.PATIENT) {
+                    findNavController().navigate(R.id.action_loginFragment_to_homeFragment)
                 }
             }
-            Log.e(TAG, "response $it")
-
-            /** Toast Message*/
-            Toast.makeText(
-                requireContext(),
-                it.message,
-                Toast.LENGTH_SHORT
-            ).show()
-
-            if (it.data?.userType == Constants.USER_TYPE.PATIENT) {
-                findNavController().navigate(R.id.action_loginFragment_to_homeFragment)
+            else{
+                /** Toast Message*/
+                Toast.makeText(
+                    requireContext(),
+                    it.message,
+                    Toast.LENGTH_SHORT
+                ).show()
             }
         })
     }

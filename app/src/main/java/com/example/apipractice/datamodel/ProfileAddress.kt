@@ -1,7 +1,10 @@
 package com.example.apipractice.datamodel
 
+import android.os.Parcelable
 import androidx.annotation.Keep
+import kotlinx.parcelize.Parcelize
 
+@Parcelize
 @Keep
 data class ProfileAddress(
     val line1: DataValue? = null,
@@ -15,4 +18,4 @@ data class ProfileAddress(
     val stateCode: Long? = null,
     val stateCodeAlpha: String? = null,
     val districtCode: Long? = null
-)
+) : Parcelable

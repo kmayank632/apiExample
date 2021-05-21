@@ -16,7 +16,7 @@ import java.io.IOException
 import javax.inject.Singleton
 
 @Singleton
-class StorePreferencesss constructor(context: Context) {
+class StorePreferences constructor(context: Context) {
 
     val dataStore: DataStore<Preferences> = context.createDataStore(
         name = "MedoPlus"
@@ -43,6 +43,7 @@ class StorePreferencesss constructor(context: Context) {
         return dataStore.getFromLocalStorageAny(key)
     }
 
+    /** call Local Storage */
     fun <T : Any> DataStore<Preferences>.getFromLocalStorageAny(
         PreferencesKey: Preferences.Key<T>
     ) =
@@ -63,6 +64,7 @@ class StorePreferencesss constructor(context: Context) {
         return dataStore.getFromLocalStorage(key)
     }
 
+    /** call Local Storage */
     inline fun <reified T> DataStore<Preferences>.getFromLocalStorage(
         PreferencesPair: Pair<String, T>
     ) =

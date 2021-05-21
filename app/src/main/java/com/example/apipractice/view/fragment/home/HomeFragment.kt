@@ -28,33 +28,33 @@ class HomeFragment : Fragment() {
         )
         viewModel = ViewModelProvider(this).get(HomeVM::class.java)
         binding.viewModel = viewModel
-        activity?.setTitle(R.string.home)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        /** Call API*/
         viewModel.getBanner()
+        /** Add List to adapter*/
         if (viewModel.bannerAdapter == null) {
-
             /* Banner Adapter */
             viewModel.bannerAdapter = BaseCommonAdapter(viewModel.bannerAdapterList)
-
-
         }
         binding.bannerRecyclerView.adapter = viewModel.bannerAdapter
 
+        /** Attach Indicator to the Recycler View*/
         binding.bannerIndicator.attachToRecyclerView(binding.bannerRecyclerView)
         val snapHelper: SnapHelper = PagerSnapHelper()
         snapHelper.attachToRecyclerView(binding.bannerRecyclerView)
+
+        /** Call setClick*/
         setClick()
     }
 
-    /** set click Listner*/
+    /** Set Click Listener*/
     fun setClick() {
 
     }
-
 
 
 }

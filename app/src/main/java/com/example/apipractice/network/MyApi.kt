@@ -16,11 +16,16 @@ import retrofit2.http.PUT
 
 interface MyApi {
 
+    companion object {
+        const val PATH = "auth/"
+        const val CMSPATH = "cms/"
+
+    }
     /** Check Login Data */
     @POST("${PATH}login/medoplus")
     fun useLogin(@Body jsonObject: JsonObject): Call<LoginModel>
 
-    /** Check Login Data */
+    /** Get Profile Data */
     @GET("${PATH}patient/profile")
     fun getProfile(): Call<ProfileModel>
 
@@ -29,26 +34,9 @@ interface MyApi {
     fun updateUserProfile(@Body jsonObject: JsonObject): Call<ProfileModel>
 
     /** Get Banner List Data */
-    @POST("cms/public/banner-listing")
+    @POST("${CMSPATH}public/banner-listing")
     fun getBannerList(): Call<BannerListModel>
 
-    companion object {
-        const val PATH = "auth/"
-        const val CMSPATH = "cms/"
 
-        //TODO Move to another package
-        private val client = OkHttpClient.Builder().apply {
-            addInterceptor(MyIntercepter())
-        }.build()
-
-        operator fun invoke(): MyApi {
-            return Retrofit.Builder()
-                .baseUrl("https://stage.api.medoplus.org/")
-                .client(client)
-                .addConverterFactory(GsonConverterFactory.create())
-                .build()
-                .create(MyApi::class.java)
-        }
-    }
 
 }

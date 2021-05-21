@@ -4,7 +4,6 @@ package com.example.apipractice.basemodel
 import androidx.annotation.Keep
 import com.google.gson.annotations.SerializedName
 
-//TODO Move Utils Classes to Similar package
 @Keep
 open class BaseModel(
     @SerializedName("status") val status: Boolean = false,

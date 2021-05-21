@@ -21,10 +21,16 @@ class BaseCommonAdapter<T : BaseViewModel>(
         holder.bind(items[position], itemClickListener)
     }
 
+    /**
+     * @return Item View Type
+     */
     override fun getItemViewType(position: Int): Int {
         return items[position].viewType
     }
 
+    /**
+     * @return Item Count
+     */
     override fun getItemCount(): Int {
         return items.size
     }

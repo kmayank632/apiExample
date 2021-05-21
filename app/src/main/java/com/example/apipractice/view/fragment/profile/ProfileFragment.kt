@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
@@ -17,7 +18,7 @@ import com.example.apipractice.basemodel.Constants.KEY
 import com.example.apipractice.databinding.FragmentMyProfileBinding
 import com.example.apipractice.datamodel.ProfileModel
 import com.example.apipractice.network.ProfileListener
-import com.example.apipractice.utills.StorePreferencesss
+import com.example.apipractice.utills.StorePreferences
 import com.example.apipractice.view.fragment.editprofile.EditProfileFragment.Companion.EDITPROFILE
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.GlobalScope
@@ -27,7 +28,7 @@ class ProfileFragment : Fragment(), ProfileListener {
 
     lateinit var binding: FragmentMyProfileBinding
     lateinit var viewModel: ProfileVM
-    lateinit var storePreferencesss: StorePreferencesss
+    lateinit var storePreferences: StorePreferences
 
     companion object {
         val LOGOUT = "LOGOUT"
@@ -49,33 +50,31 @@ class ProfileFragment : Fragment(), ProfileListener {
     }
 
 
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        activity?.setTitle(R.string.profile)
+        /** Initialize StorePreferences */
+        storePreferences = StorePreferences(requireContext())
 
-        storePreferencesss = StorePreferencesss(requireContext())
-
-        /** set profile data from dataStore*/
+        /** Set Profile Data From DataStore*/
         viewModel.app.getProfileData()?.let { viewModel.setUIData(it) }
 
-        /*** Profile updated Snackbar */
+        /*** Profile Updated Snackbar */
         when (arguments?.getString(KEY)) {
             EDITPROFILE ->
                 Snackbar.make(
                     requireContext(),
                     binding.layout,
-                    "Profile Updated Successfully",
+                    viewModel.resourceProvider.getString(R.string.profile_update),
                     Snackbar.LENGTH_SHORT
                 ).show()
         }
-        /** call API */
+        /** Call API */
         viewModel.getProfileData()
 
         onClick()
     }
 
-    /** Set click Listener */
+    /** Set Click Listener */
     fun onClick() {
 
         /** Logout Button Click */
@@ -83,12 +82,12 @@ class ProfileFragment : Fragment(), ProfileListener {
 
             /** clear dataStore token and userType */
             GlobalScope.launch {
-                storePreferencesss.storeValue(StorePreferencesss.Token, "")
-                storePreferencesss.storeValue(StorePreferencesss.User, "")
-                storePreferencesss.storeValue(StorePreferencesss.DEMAND_PROFILE_DATA, "")
+                storePreferences.storeValue(StorePreferences.Token, "")
+                storePreferences.storeValue(StorePreferences.User, "")
+                storePreferences.storeValue(StorePreferences.DEMAND_PROFILE_DATA, "")
             }
             val bundle = bundleOf().apply {
-                putString(Constants.KEY, LOGOUT)
+                putString(KEY, LOGOUT)
             }
             /** Navigate to Login with bundle */
             findNavController().navigate(R.id.action_profileFragment_to_loginFragment, bundle)
@@ -103,17 +102,25 @@ class ProfileFragment : Fragment(), ProfileListener {
     /** Api Response success */
     override fun onSuccess(loginResponse: LiveData<ProfileModel>) {
         loginResponse.observe(this, Observer {
-            GlobalScope.launch {
+            if (it.status == true) {
+                GlobalScope.launch {
 
-                /** Set UI data */
-                it.data?.let { it1 ->
-                    viewModel.setUIData(it1)
+                    /** Set UI data */
+                    it.data?.let { it1 ->
+                        viewModel.setUIData(it1)
 
-                    /** Store Profile data in DataStore */
-                    storePreferencesss.storeValue(StorePreferencesss.DEMAND_PROFILE_DATA, it1)
-                    viewModel.app.setProfileData(it1)
+                        /** Store Profile Data In DataStore */
+                        storePreferences.storeValue(StorePreferences.DEMAND_PROFILE_DATA, it1)
+                        viewModel.app.setProfileData(it1)
+                    }
                 }
-
+            } else {
+                /** Toast Message*/
+                Toast.makeText(
+                    requireContext(),
+                    it.message,
+                    Toast.LENGTH_SHORT
+                ).show()
             }
         })
     }

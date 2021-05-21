@@ -1,35 +1,36 @@
 <resources>
     <string name="app_name">Api Example</string>
 
-    <!-- TODO Remove Unwanted String and Make Packages -->
-
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="unique_id">Register Email</string>
-    <string name="unique_id_hint">Enter your register email</string>
-    <string name="password">Password</string>
-    <string name="become_part_of_our_team">Become part of our team</string>
-    <string name="description_to_accept_privacy_policy"><![CDATA[By logging in, you agree to our T&C and Privacy Policy.]]></string>
-    <string name="password_hint">Enter your password</string>
-    <string name="sign_in_using_phone_otp"><![CDATA[Sign in using phone & OTP]]></string>
-    <string name="forgot_password">Forgot Password</string>
-    <string name="sign_up">Sign up</string>
+    <string name="medo_id_format">Medoplus ID: %1$s</string>
+    <string name="logout">Logout</string>
+    <string name="failed_to_get_open_file_base_url">failed</string>
+    <string name="medoplus_id">Medoplus Id</string>
+    <string name="profile_date">25–02–2021</string>
+    <string name="Profile_blood_group">B+</string>
+    <string name="damon">Damon</string>
+    <string name="health_insurance_provider">Health insurance provider</string>
+    <string name="empty">Empty</string>
+    <string name="phn">8449701684</string>
+    <string name="home">Home</string>
+    <string name="sign_out">Sign out</string>
+    <string name="location">533 Iyengar Stream, Tagoreberg, Madya Pradesh</string>
+    <string name="existing_health_issues">Existing health isuues</string>
+    <string name="health_insurance_policy_no">Health insurance policy no.</string>
+    <string name="edit_basic_detail_text">Edit Basic Details</string>
     <string name="login">Login</string>
-    <string name="phone_verification">Phone Verification</string>
-    <string name="verification">Verification</string>
-    <string name="description_verification_screen">OTP has been sent on your registered mobile no. Please enter it below</string>
-    <string name="did_n_t_receive">Didn\'t receive!</string>
-    <string name="verify">Verify</string>
-    <string name="verify_and_login"><![CDATA[Verify & login]]></string>
-    <string name="resend">Resend</string>
-    <string name="cancel">Cancel</string>
-
-    <string name="basic_details">Basic Details</string>
-    <string name="customer_signup">Customer Signup</string>
-    <string name="vle_signup">VLE Signup</string>
+    <string name="description_to_accept_privacy_policy"><![CDATA[By logging in, you agree to our T&C and Privacy Policy.]]></string>
+    <string name="please_enter_medoID">Please enter Medoplus Id</string>
+    <string name="please_enter_valid_medoID">Please enter valid  Id</string>
+    <string name="please_enter_valid_password">Please enter valid  Password</string>
+    <string name="password_hint">Enter your password</string>
+    <string name="length_greater_then_8">length > 8</string>
+    <string name="notifications">Notifications</string>
+    <string name="my_profile">My Profile</string>
+    <string name="password">Password</string>
+    <string name="edit_profile">Edit Profile</string>
     <string name="first_name">First Name*</string>
     <string name="first_name_edit_text">Enter first Name</string>
     <string name="last_name">Last Name*</string>
-    <string name="date_of_birth">Date of birth*</string>
     <string name="last_name_edit_text">Enter last Name</string>
     <string name="gender">Gender*</string>
     <string name="male">Male</string>
@@ -37,241 +38,13 @@
     <string name="transgender">Transgender</string>
     <string name="address_line_1">Address line 1*</string>
     <string name="address_line_2">Address line 2*</string>
-    <string name="state">State*</string>
-    <string name="district">District*</string>
-    <string name="block_tehsil">Block/Tehsil*</string>
-    <string name="pin">PIN code*</string>
-    <string name="date_hint">DD-MM-YYYY</string>
-    <string name="phone_text">Phone no. (for OTP Verification)*</string>
-    <string name="edit_phone_text">Phone no. (Verification will be done)*</string>
-    <string name="verify_text">Verify</string>
-    <string name="pin_edit_text">123456</string>
-    <string name="pin_hint">Enter Pin code</string>
-    <string name="verify_medo_id_text">Enter the Medoplus id of Existing Family Member, if Any</string>
     <string name="first_alternate_no_text">1st Alternate phone no.</string>
     <string name="second_alternate_no_text">2nd Alternate phone no.</string>
-    <string name="blood_group">Blood group</string>
-    <string name="save_and_complete_text">Save and complete later</string>
-    <string name="save_and_add_more">Save and add more</string>
-    <string name="upload_medical_history">Upload Medical History</string>
-    <string name="next">Next</string>
-    <string name="upload_documents">Upload Documents</string>
-    <string name="upload_photo_text">Upload Photo*</string>
-    <string name="upload_pan_text">Upload PAN/Ration/Driving License/Voter ID*</string>
-    <string name="phone_no_hint_text">Enter phone number</string>
-    <string name="instructions">Instructions!</string>
-    <string name="upload_button">Upload or take Photo</string>
-    <string name="instructions_text">1. Please upload only the valid image format (.jpg, .jpeg, .png, .svg) "\n"2. Image should not be more than 10 MB. "\n"3. Taken within the last 6 months to reflect your current appearance "\n"4. Taken in front of a plain white or off-white background "\n"5. Taken in full-face view directly facing the camera "\n"6. With a neutral facial expression and both eyes open "\n"7. Taken in clothing that you normally wear on a daily basis</string>
-    <string name="health_insurance_detail">Health Insurance Details</string>
-    <string name="health_insurance_coverage">Health insurance coverage</string>
-    <string name="health_insurance_company_name">Health insurance company name</string>
-    <string name="health_insurance_policy_no">Health insurance policy no.</string>
-    <string name="upload_health_insurance_card_policy">Upload health insurance Card/policy</string>
-    <string name="health_profile">Health Profile</string>
-    <string name="existing_health_issues">Existing health isuues</string>
-    <string name="vaccinated_covid">Vaccinated for Covid 19*</string>
-    <string name="upload_medical_record">Upload Medical Records</string>
-    <string name="add_new_records">Add new records (Doctor prescriptions, lab reports etc.)</string>
-    <string name="document_name_text">Name of the document</string>
-    <string name="type_document_text">Type of the document</string>
-    <string name="reference_date_text">Reference date</string>
-    <string name="short_description_text">Short description</string>
-    <string name="ram_singh_9935367801_verified_medoplus_user">Ram Singh / 9935367801- Verified Medoplus User</string>
-    <string name="phone_text_vle">Phone no. (Verification will be done)*</string>
-    <string name="rahul_computer_center">Rahul Computer Center</string>
-    <string name="main_business">Main Business*</string>
-    <string name="select_main_business">Select Main Business</string>
-    <string name="email">Email</string>
-    <string name="enter_email">Enter email</string>
-    <string name="enter_password">Enter password</string>
-    <string name="reenter_password">Re-enter Password</string>
-    <string name="share_via">Share via</string>
-    <string name="name">ButterScotch Cake</string>
-    <string name="map_location">1kg</string>
-    <string name="location">533 Iyengar Stream, Tagoreberg, Madya Pradesh</string>
-    <string name="cut_price">Rs.500/-</string>
-    <string name="cod">COD Available</string>
-    <string name="please_wait">Please wait</string>
-    <string name="error_message">sorry</string>
-    <string name="hint_ok">ok</string>
-    <string name="dialog_error">your transaction is completed</string>
-    <string name="terms_and_conditions_underline"><![CDATA[Terms & Conditions]]></string>
-    <string name="call_support">Call Support</string>
-    <string name="cake">cake</string>
-    <string name="mart">mart</string>
-    <string name="rahul_subrato_roy">Mayank kumar</string>
-    <string name="_91_9936786578">8449701684</string>
-    <string name="chj01000001">kmayank632@gmail.com</string>
-
-    <!--Drawer Content Strings-->
-    <string name="my_profile">My Profile</string>
-    <string name="savings">Savings</string>
-    <string name="track_your_health">Track your Health</string>
-    <string name="rate_the_app_drawer">Rate the App</string>
-    <string name="about_us">About Us</string>
-    <string name="t_amp_c"><![CDATA[T & C]]></string>
-    <string name="privacy_policy">Privacy Policy</string>
-    <string name="privacy_policy_underline"><u>Privacy Policy</u></string>
-    <string name="cancellation_and_refund_policy">Cancellation and Refund policy</string>
-    <string name="sign_out">Sign out</string>
-    <string name="all_rights_reserved_medoplus_copyright_2020">All rights reserved , MedoPlus Copyright 2020</string>
-    <string name="notifications">Notifications</string>
-    <string name="find">Find</string>
-    <string name="appointments">My Orders</string>
-    <string name="records">Cart</string>
-    <string name="profile">My Profile</string>
-    <string name="blank_item" />
-    <string name="profile_name_text">Shop</string>
-    <string name="profile_address_text">Welcome to cake store</string>
-    <string name="add_family_member">Add family member</string>
-    <string name="notification">Notifications</string>
-    <string name="book_appointment">Todays\'s Deals</string>
-    <string name="find_nearby">Pastry</string>
-    <string name="explore_more">Cake</string>
-    <string name="dummy_data">Order is ready</string>
-    <string name="sort">Sort</string>
-    <string name="search_results">Search Result</string>
-    <string name="nearby_pharmacies">Cakes</string>
-    <string name="search_by_name">Search by Name</string>
-    <string name="search_pharmacies_hardoi">Search Cake</string>
-    <string name="search_pharmacies">Search Cake</string>
-    <string name="rate_the_facility_">Rate the Facility</string>
-    <string name="leave_feedback_text">leave feedback here</string>
-    <string name="submit">Submit</string>
-    <string name="pharmacies">Cake Details</string>
-    <string name="add_to_cart">ADD TO CART</string>
-    <string name="buy_now">BUY NOW</string>
-    <string name="forgot_your_password_title">Forgot Password</string>
-    <string name="forgot_your_password">Forgot your Password?</string>
-    <string name="get_reset_code">Get Reset Code</string>
-    <string name="forgot_phone_number">Forgot Phone Number</string>
-    <string name="medo_plus_id_d4df00098">Enter E-mail</string>
-    <string name="description_forgot_password_screen">Don\'t worry! Enter your medo plus Id below to receive a reset password link.</string>
-    <string name="registered_phone_number">Registered Phone Number</string>
-    <string name="registered_number_hint">Enter registered number</string>
-    <string name="don_t_have_an_account_sign_up">Don\'t have an Account?</string>
-    <string name="sign_up_become_part_of_medoplus_network"><![CDATA[Sign up & become part of MedoPlus Network]]></string>
-    <string name="request_otp">Request OTP</string>
-    <string name="sign_in_using_phone_number">Sign in using ID and Password</string>
-    <string name="new_password">New Password</string>
-    <string name="confirm_password">Confirm Password</string>
-    <string name="update_password">Update Password</string>
-    <string name="reset_password">Reset Password</string>
-    <string name="terms_condition_key">T&amp;C</string>
-    <string name="privacy_policy_key">Privacy Policy</string>
-    <string name="details">Details</string>
-    <string name="cake_desc">The Butterscotch cake is the perfect combination of smooth cream, melting caramel, and butterscotch. This cake is a perfect thrill as a dessert. Each layer of the cake is iced with buttercream and butterscotch. The different tunes of this delicious Butterscotch cake will surely leave you grooving for more. Get this cake for a memorable treat to your people and taste buds go crazy.</string>
-    <string name="ingrediant">All-purpose Flour, White Sugar, Brown Sugar, Baking Powder, Baking Soda, Salt, Milk, Cornstarch, Butterscotch Chips, Butter, Buttercream frosting, Sour cherries.</string>
-    <string name="order_details">Order Details</string>
-    <string name="continue_button">Continue</string>
-    <string name="total_amount">TOTAL AMOUNT</string>
-    <string name="add_to_wishlist">ADD TO WISHLIST</string>
-    <string name="deals_of_the_day">Deals of the Day!!</string>
-    <string name="hi_mayank_welcome_to_cakemart">Hi, Mayank Welcome to cakemart</string>
-    <string name="thank_you_for_order_your_order_will_be_delivered_within_24_hours">Thank you for order, your order will be delivered within 24 hours</string>
-    <string name="browse_cakes_by_flavour">Browse Cakes By Flavour</string>
-    <string name="view_all">View all</string>
-    <string name="flavours">Flavours</string>
-    <string name="shop_by_category">Shop by Category</string>
-    <string name="enter_the_sender_e_mail">Enter the sender e-mail</string>
-    <string name="enter_the_message">Enter the message</string>
-    <string name="from">FROM:-</string>
-    <string name="no_messages_found">No messages Found</string>
-    <string name="please_enter_medoID">Please enter Medoplus Id</string>
-    <string name="please_enter_password">Please Enter Password</string>
-    <string name="check_internet">Check Internet</string>
-    <string name="fcm_generate_error">FCM error</string>
-    <string name="enter_valid_id">Enter Valid Id</string>
-    <string name="error_invalid_data">Invalid Data</string>
-    <string name="medo_id_format">Medoplus ID:\n%1$s</string>
-    <string name="failed_to_get_profile_data">Failed to get Profile Data</string>
-    <string name="are_you_sure_to_sign_out">Are you sure you want to exit</string>
-    <string name="yes">yes</string>
-    <string name="choose_image_source">Choose Image Source</string>
-    <string name="camera">Camera</string>
-    <string name="gallery">Gallery</string>
-    <string name="no_relevant_app">No Relevent App</string>
-    <string name="preparing_image">Preparing Image</string>
-    <string name="camera_permission_denied">Camera Permission Denied</string>
-    <string name="permission_required">Permission Required</string>
-    <string name="provide_permission">Provide Permission</string>
-    <string name="grant_permission">Grant Permission</string>
-    <string name="dismiss">Dismiss</string>
-    <string name="uploading_image">Uploading Image</string>
-    <string name="edit_basic_detail_text">Edit Basic Details</string>
-
-
-
-
-    <!-- Sign Up Strins-->
-    <string name="enter_valid_pin">Enter Valid Pin code</string>
-    <string name="see_records">See Records</string>
-    <string name="pan_text">PAN/Ration/Driving License/Voter ID</string>
-    <string name="health_insurance_card_policy">Health insurance Card/policy</string>
-    <string name="verified_medo_plus_user_format">%1$s - Verified Medoplus User</string>
-    <string name="edit_profile">Edit Profile</string>
-    <string name="firm_name">Firm Name</string>
-    <string name="select_address">Select address</string>
-    <string name="update">Update</string>
-    <string name="select_blood_group">Select Blood Group</string>
     <string name="altenate_pjone_no_2_hint">2nd Alternate phone no</string>
     <string name="altenate_pjone_no_1_hint">1st Alternate phone no.</string>
-    <string name="select_block">Select Block</string>
-    <string name="block">Block*</string>
-    <string name="select_district">Select District</string>
-    <string name="select_state">Select State</string>
-    <string name="address_line_1_hint">"Enter Address "</string>
-    <string name="please_fill_field">Please Fill Field</string>
-    <string name="please_enter_valid_phone">Please Enter Valid Phone no.</string>
-    <string name="invalid_pincode">Invalid pincode</string>
-    <string name="invalid_state_district_data">Invalid State Code</string>
-    <string name="error_retry">Retry</string>
-    <string name="please_select_date_of_birth">Please Select DOB</string>
-    <string name="please_select_address">Please Select address</string>
-    <string name="please_enter_valid_pin_code">Please enter valid pincode</string>
-    <string name="please_select_block_tehsil">Please Select block</string>
-    <string name="alternate_phone_should_different">Alternate phone should different</string>
-    <string name="select_qualification">Select Qualification</string>
-    <string name="please_verify_medoplus_id">Please verify_medod</string>
-    <string name="update_successfully">Update Successfully</string>
-    <string name="choose_location">Choose Location</string>
-    <string name="location_access">Location Access</string>
-    <string name="collect_location_data">Collect Location Data</string>
-    <string name="please_turn_on_location_services">Please Turn on your location</string>
-    <string name="current_location">Current Location</string>
-    <string name="firm_address_line_2">Address line 2</string>
-    <string name="firm_address_line_1">Address line 1</string>
-    <string name="logout">Logout</string>
-    <string name="failed_to_get_open_file_base_url">failed</string>
-    <string name="medoplus_id">Medoplus Id</string>
-    <string name="profile_date">25-02-2021</string>
-    <string name="Profile_blood_group">B+</string>
-    <string name="damon">Damon</string>
-    <string name="health_insurance_provider">Health insurance provider</string>
-    <string name="empty">Empty</string>
-    <string name="phn">8449701684</string>
-    <string name="home">Home</string>
-
-    <!-- Business Items -->
-    <string-array name="business_items">
-        <item>CSC</item>
-        <item>ASHA</item>
-        <item>Medical Shop</item>
-        <item>Quack</item>
-        <item>Computer Shop</item>
-        <item>Banking Correspondent</item>
-        <item>Others</item>
-    </string-array>
-
-    <!-- Business Items -->
-    <string-array name="business_items_other_locale">
-        <item>सीएससी</item>
-        <item>आशा</item>
-        <item>मेडिकल शॉप</item>
-        <item>क्वैक</item>
-        <item>कंप्यूटर शॉप</item>
-        <item>बैंकिंग संवाददाता</item>
-        <item>अन्य</item>
-    </string-array>
+    <string name="cancel">Cancel</string>
+    <string name="update">Update</string>
+    <string name="profile_update">Profile Updated Successfully</string>
+    <string name="logout_successfully">Logout Successfully</string>
 
 </resources>

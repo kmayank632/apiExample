@@ -1,8 +1,11 @@
 package com.example.apipractice.datamodel
 
+import android.os.Parcelable
 import androidx.annotation.Keep
 import com.google.gson.annotations.SerializedName
+import kotlinx.parcelize.Parcelize
 
+@Parcelize
 @Keep
 data class ProfileData(
     @SerializedName("healthInsurance") val healthInsurance: ProfileHealthInsurance? = null,
@@ -40,4 +43,4 @@ data class ProfileData(
     val distance: Double? = null,
     val location: List<Double>? = null,
     val status: String? = null
-)
+) : Parcelable

@@ -15,18 +15,20 @@ import com.google.gson.JsonObject
 
 class EditProfileVM : ViewModel() {
 
-    /* Selected Sign Up Type */
+    /** Selected Sign Up Type */
     var signUpType = ObservableField(Constants.USER_TYPE.PATIENT)
 
+    /** Data Members */
     var profileData: ProfileData? = null
 
+    /** Initialize MyApplication variable */
     val app = MyApplication.getApplication()
 
 
     /**
-     * Signup Basic
+     * Edit Basic Details Field
      * */
-    /* Ui Fields */
+    /** Ui Fields */
     val firstNameField = ObservableField("")
     val isValidFirstName = ObservableField(BaseModel(true, ""))
     val lastNameField = ObservableField("")
@@ -37,11 +39,12 @@ class EditProfileVM : ViewModel() {
     val alternatePhoneSecondNumberField = ObservableField("")
     val isValidAlternatePhoneNumberSecond = ObservableField(BaseModel(true, ""))
 
-    /* Data Members */
     var profileAuthListener: ProfileListener? = null
 
-
+    /** On Update Button Click */
     fun updateProfileData() {
+
+        /** PUT Request Body Parameters */
         val jsonObject = JsonObject()
         val firstNameJsonObject = JsonObject()
         firstNameJsonObject.addProperty(
@@ -87,6 +90,7 @@ class EditProfileVM : ViewModel() {
         }
         Log.e(ContentValues.TAG, "response $jsonObject")
 
+        /** Call API */
         val loginResponse = UserRepository().updateProfile(jsonObject)
         profileAuthListener?.onSuccess(loginResponse)
     }

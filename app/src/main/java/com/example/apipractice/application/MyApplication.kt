@@ -8,21 +8,23 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.multidex.MultiDex
 import com.example.apipractice.datamodel.ProfileData
 
-//TODO Proper Commenting on Methods with Parameters
-//TODO Make All Data Classes Parcelable and use @Keep Annotation (if not used)
+
 class MyApplication : Application() {
 
+    /** Running Activity Instance */
     lateinit var currentActivity: AppCompatActivity
 
-
+    /** Login Token */
     private var logintoken: String = ""
 
-    private var loginuserType: String? = ""
+    /** User Type */
+    private var loginUserType: String? = ""
 
+    /** Profile Data */
     private var userProfileData: ProfileData? = null
 
+    /** get Instance of the activity */
     companion object {
-
         lateinit var mInstance: MyApplication
 
         @Synchronized
@@ -39,6 +41,7 @@ class MyApplication : Application() {
 
     override fun onCreate() {
         super.onCreate()
+        /** set Instance */
         mInstance = this
 
         registerActivityLifecycleCallbacks(object : ActivityLifecycleCallbacks {
@@ -69,23 +72,39 @@ class MyApplication : Application() {
         })
 
     }
-
+    /**
+     * Store Token
+     * */
     fun setToken(token: String?) {
         logintoken = token ?: ""
     }
 
+    /**
+     * @return Token
+     * */
     fun getToken() = logintoken
 
-
+    /**
+     * store User Type
+     * */
     fun setUserType(user: String?) {
-        loginuserType = user ?: ""
+        loginUserType = user ?: ""
     }
 
-    fun getUserType() = loginuserType
+    /**
+     * @return User Type
+     * */
+    fun getUserType() = loginUserType
 
+    /**
+     * store profile data
+     * */
     fun setProfileData(profileData: ProfileData) {
         userProfileData = profileData
     }
 
+    /**
+     * @return Profile Data
+     * */
     fun getProfileData() = userProfileData
 }

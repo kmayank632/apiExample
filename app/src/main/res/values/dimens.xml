@@ -1,13 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources>
 
-    <!-- TODO Remove Unwanted String and Make Packages -->
     <dimen name="small_text">@dimen/_8ssp</dimen>
     <dimen name="regular_text">@dimen/_10sdp</dimen>
     <dimen name="medium_text">@dimen/_12sdp</dimen>
     <dimen name="large_text">@dimen/_14sdp</dimen>
     <dimen name="extra_large_text">@dimen/_16sdp</dimen>
-    <dimen name="vertical_recyclerview_last_item_margin">@dimen/_25sdp</dimen>
-    <dimen name="large_vertical_recyclerview_last_item_margin">@dimen/_75sdp</dimen>
-    <dimen name="corner_stroke" tools:ignore="PxUsage">2px</dimen>
 </resources>
