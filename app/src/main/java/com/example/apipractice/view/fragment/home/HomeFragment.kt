@@ -15,7 +15,10 @@ import com.example.apipractice.databinding.FragmentHomeBinding
 
 class HomeFragment : Fragment() {
 
+    /* ViewBinding Variable */
     lateinit var binding: FragmentHomeBinding
+
+    /* ViewModel Variable */
     lateinit var viewModel: HomeVM
 
     override fun onCreateView(
@@ -33,26 +36,26 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        /** Call API*/
+        /* Call API*/
         viewModel.getBanner()
-        /** Add List to adapter*/
+        /* Add List to adapter*/
         if (viewModel.bannerAdapter == null) {
             /* Banner Adapter */
             viewModel.bannerAdapter = BaseCommonAdapter(viewModel.bannerAdapterList)
         }
         binding.bannerRecyclerView.adapter = viewModel.bannerAdapter
 
-        /** Attach Indicator to the Recycler View*/
+        /* Attach Indicator to the Recycler View*/
         binding.bannerIndicator.attachToRecyclerView(binding.bannerRecyclerView)
         val snapHelper: SnapHelper = PagerSnapHelper()
         snapHelper.attachToRecyclerView(binding.bannerRecyclerView)
 
-        /** Call setClick*/
+        /* Call setClick*/
         setClick()
     }
 
     /** Set Click Listener*/
-    fun setClick() {
+    private fun setClick() {
 
     }
 

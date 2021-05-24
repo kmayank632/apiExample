@@ -32,7 +32,6 @@ class CustomBindings {
                         .error(R.drawable.ic_account)
                         .diskCacheStrategy(DiskCacheStrategy.ALL)
                         .priority(Priority.HIGH)
-                        .transform(CenterCrop(), RoundedCorners(1000))
                 )
                 .into(view)
         }

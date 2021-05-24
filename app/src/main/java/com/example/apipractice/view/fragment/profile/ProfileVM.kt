@@ -2,27 +2,43 @@ package com.example.apipractice.view.fragment.profile
 
 import androidx.databinding.ObservableBoolean
 import androidx.databinding.ObservableField
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.example.apipractice.application.MyApplication
 import com.example.apipractice.datamodel.DataValue
 import com.example.apipractice.datamodel.ProfileData
+import com.example.apipractice.datamodel.ProfileModel
 import com.example.apipractice.datamodel.ServicesDataList
-import com.example.apipractice.network.ProfileListener
-import com.example.apipractice.repo.UserRepository
+import com.example.apipractice.network.NetworkModule
 import com.example.apipractice.utills.DateFormatUtils
+import com.example.apipractice.utills.StorePreferences
 import com.example.apipractice.view.listener.ResourceProvider
+import kotlinx.coroutines.launch
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 
 class ProfileVM : ViewModel() {
 
-    /** Data Members */
+    /* Data Members */
     var profileData: ProfileData? = null
-    val app = MyApplication.getApplication()
 
-    /** Initialize ResourceProvider */
+    /* Initialize ResourceProvider */
     val resourceProvider: ResourceProvider = ResourceProvider(MyApplication.getApplication())
 
-    /** Ui Fields */
+    /* Initialize MyApplication */
+    val app = MyApplication.getApplication()
+
+    /* Initialize the StorePreferences */
+    var storePreferences: StorePreferences = StorePreferences(app)
+
+    /* MutableLiveData Variable to Store Error  */
+    var errorMessage = MutableLiveData<String?>()
+
+
+    /* Ui Fields */
     val visible = ObservableBoolean(false)
     val profilePictureField = ObservableField("")
     val medoPlusIdField = ObservableField("")
@@ -33,31 +49,86 @@ class ProfileVM : ViewModel() {
     val phoneNumberField = ObservableField("")
     val bloodGroup = ObservableField("")
 
-    /** Health Profile */
+    /* Health Profile */
     val healthIssuesField = ObservableField("")
     val healthCoverageField = ObservableField(false)
     val healthProviderField = ObservableField("")
     val healthPolicyNumberField = ObservableField("")
-    var listener: ProfileListener? = null
+
+    val apiResponse = MutableLiveData<ProfileModel>()
+
 
     /**
      * Get Profile Data
      * */
     fun getProfileData() {
-        /** Set Progress Bar Visibility Visible*/
+
+        /* Set Progress Bar Visibility Visible*/
         visible.set(true)
 
-        /** Call UserRepository Function */
-        val loginResponse = UserRepository().getProfile()
+        NetworkModule.retrofit.getProfile()
+            .enqueue(object : Callback<ProfileModel> {
+                override fun onResponse(
 
-        /** Pass loginResponse to AuthListener */
-        listener?.onSuccess(loginResponse)
+                    call: Call<ProfileModel>,
+                    response: Response<ProfileModel>
+                ) {
+                    if (response.isSuccessful) {
+                        if (response.body()?.status == true && response.body() != null) {
 
-        /** Set Progress Bar Visibility Gone*/
+                            apiResponse.postValue(response.body())
+
+                            viewModelScope.launch {
+                                response.body()?.data?.let { it1 ->
+
+                                    /* call setUIData  */
+                                    setUIData(it1)
+
+                                    /* Store Profile Data In DataStore */
+                                    storePreferences.storeValue(
+                                        StorePreferences.DEMAND_PROFILE_DATA,
+                                        it1
+                                    )
+                                    app.setProfileData(it1)
+                                }
+                            }
+                            /*Set the message  */
+                            errorMessage.postValue(response.body()?.message)
+                        } else {
+                            /*Set the message  */
+                            errorMessage.postValue(response.body()?.message)
+                        }
+                    } else {
+                        /*Set the message  */
+                        errorMessage.postValue(response.message())
+                    }
+                }
+
+
+                override fun onFailure(call: Call<ProfileModel>, t: Throwable) {
+
+                    /*Set the Failure message  */
+                    errorMessage.postValue(t.cause.toString())
+                }
+
+            })
+
+        /* Set Progress Bar Visibility Gone*/
         visible.set(false)
+
 
     }
 
+    /**Set Logout*/
+
+    fun setLogout() {
+        /* Clear DataStore Data */
+        viewModelScope.launch {
+            storePreferences.storeValue(StorePreferences.Token, "")
+            storePreferences.storeValue(StorePreferences.User, "")
+            storePreferences.storeValue(StorePreferences.DEMAND_PROFILE_DATA, "")
+        }
+    }
 
     /**
      * Set Ui Data

@@ -17,14 +17,19 @@ import com.example.apipractice.utills.StorePreferences
 
 class SplashFragment : Fragment() {
 
+    /* ViewBinding Variable */
     lateinit var binding: FragmentSplashBinding
+
+    /* StorePreferences Variable */
     lateinit var storePreferences: StorePreferences
+
+    /* Time delay Variable */
+    private val time : Long = 2 * 1000 /* 2 Seconds */
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
+    ): View {
         binding = DataBindingUtil.inflate(
             inflater, R.layout.fragment_splash, container, false
         )
@@ -33,29 +38,24 @@ class SplashFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        /** Initialize StorePreference */
+
+        /* Initialize StorePreference */
         storePreferences = StorePreferences(requireContext())
 
-        /** Observe User type From Database*/
-        storePreferences.readValue(StorePreferences.User).asLiveData().observe(requireActivity(),{
+        /* Observe User type From Database*/
+        storePreferences.readValue(StorePreferences.User).asLiveData().observe(viewLifecycleOwner,{
 
-            /** Check Login as Patient */
-            if ( it == Constants.USER_TYPE.PATIENT) {
-
-                /** Handler For Delay*/
-                Handler(Looper.getMainLooper()).postDelayed({
+            /* Handler For Delay*/
+            Handler(Looper.getMainLooper()).postDelayed({
+                if ( it == Constants.USER_TYPE.PATIENT) {
                     findNavController().navigate(R.id.action_splashFragment_to_homeFragment)
-                }, 2000)
-            }
-            else{
+                }
+                else{
 
-                /** Move To Login
-                 * Handler For Delay
-                 * */
-                Handler(Looper.getMainLooper()).postDelayed({
                     findNavController().navigate(R.id.action_splashFragment_to_loginFragment)
-                }, 2000)
-            }
+                }
+            }, time )
+
         })
     }
 

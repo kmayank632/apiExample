@@ -126,6 +126,4 @@
         <item name="buttonTint">@android:color/transparent</item>
         <item name="buttonTintMode">src_over</item>
     </style>
-
-    <string name="otp_hint">0123</string>
 </resources>

@@ -1,5 +1,6 @@
 package com.example.apipractice.view.fragment.home
 
+import androidx.lifecycle.ViewModelProvider
 import com.example.apipractice.R
 import com.example.apipractice.basemodel.BaseViewModel
 import com.example.apipractice.datamodel.BannerData

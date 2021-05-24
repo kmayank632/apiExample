@@ -4,26 +4,26 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.apipractice.R
 import com.example.apipractice.basemodel.Constants.KEY
 import com.example.apipractice.databinding.FragmentEditProfileBinding
-import com.example.apipractice.datamodel.ProfileModel
-import com.example.apipractice.network.ProfileListener
 
-class EditProfileFragment : Fragment(), ProfileListener {
+class EditProfileFragment : Fragment() {
+
     companion object {
         val EDITPROFILE = "EDITPROFILE"
-
     }
 
+    /* ViewBinding Variable */
     lateinit var binding: FragmentEditProfileBinding
+
+    /* ViewModel Variable */
     lateinit var viewModel: EditProfileVM
 
     override fun onCreateView(
@@ -36,41 +36,67 @@ class EditProfileFragment : Fragment(), ProfileListener {
         )
         viewModel = ViewModelProvider(this).get(EditProfileVM::class.java)
         binding.viewModel = viewModel
-        viewModel.profileAuthListener = this
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        /**Set UI Fields */
+        /*Set UI Fields */
         viewModel.app.getProfileData()?.let { viewModel.setUiData(it) }
 
-        /**Call setClick Function*/
+        /*Call setClick Function*/
         setClick()
+
+        /*Call observe Function*/
+        observe()
     }
 
     /** set click Listner*/
     fun setClick() {
+
+        /* Update Button Click*/
         binding.updateButton.setOnClickListener {
             viewModel.updateProfileData()
         }
+
+        /* Cancel Button Click*/
         binding.cancelButton.setOnClickListener {
             findNavController().navigateUp()
         }
     }
 
-    /** Api Success*/
-    override fun onSuccess(loginResponse: LiveData<ProfileModel>) {
-        loginResponse.observe(this, Observer {
+    private fun observe() {
+        /* Observe Error*/
+        viewModel.errorMessage.observe(viewLifecycleOwner, {
+            if (it != null) {
 
-            val bundle = bundleOf().apply {
-                putString(KEY, EDITPROFILE)
+                /* Toast Message*/
+                Toast.makeText(
+                    requireContext(),
+                    viewModel.errorMessage.value,
+                    Toast.LENGTH_SHORT
+                ).show()
             }
-            /**Navigate to Profile*/
-            findNavController().navigate(R.id.action_editProfileFragment_to_profileFragment, bundle)
+        })
+
+        /* Observe Response*/
+        viewModel.apiResponse.observe(viewLifecycleOwner, {
+
+            /* Check Status*/
+            if (it.status == true) {
+
+                /* EditProfile Bundle for Snackbar */
+                val bundle = bundleOf().apply {
+                    putString(KEY, EDITPROFILE)
+                }
+
+                /* Navigate to Profile*/
+                findNavController().navigate(
+                    R.id.action_editProfileFragment_to_profileFragment,
+                    bundle
+                )
+            }
         })
     }
-
-
 }

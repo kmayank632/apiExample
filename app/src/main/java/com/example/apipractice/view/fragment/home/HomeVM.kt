@@ -1,8 +1,5 @@
 package com.example.apipractice.view.fragment.home
 
-import android.content.ContentValues.TAG
-import android.util.Log
-import android.view.View
 import androidx.databinding.ObservableField
 import androidx.lifecycle.ViewModel
 import com.example.apipractice.application.MyApplication
@@ -19,9 +16,10 @@ import retrofit2.Response
 class HomeVM : ViewModel() {
     var bannerAdapterList: ArrayList<BannerHomeItemViewModel> = ArrayList()
     var bannerAdapter: BaseCommonAdapter<BannerHomeItemViewModel>? = null
+
     /** Initialize ResourceProvider */
     val resourceProvider: ResourceProvider = ResourceProvider(MyApplication.getApplication())
-    var snakbarMessage=ObservableField("")
+    var snakbarMessage = ObservableField("")
 
     /** GET Banner API*/
     fun getBanner() {
@@ -58,18 +56,20 @@ class HomeVM : ViewModel() {
                                     }
                                     bannerAdapter?.notifyDataSetChanged()
                                 }
-                            }
-                            else{
+                            } else {
+                                /**Set Snackbar for data is null*/
                                 snakbarMessage.set("${response.body()?.message}")
                             }
                         }
                     }
 
                 }
+
                 override fun onFailure(
                     call: Call<BannerListModel>,
                     t: Throwable
                 ) {
+                    /**Set Snackbar for onFailure*/
                     snakbarMessage.set("${t.cause}")
                 }
 

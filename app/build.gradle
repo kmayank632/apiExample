@@ -119,7 +119,9 @@ dependencies {
 
     /** DataStore Component*/
     def dataStore_version = "1.0.0-alpha06"
+    //noinspection GradleDependency
     implementation "androidx.datastore:datastore-preferences:$dataStore_version"
+    //noinspection GradleDependency
     implementation "androidx.datastore:datastore-core:$dataStore_version"
 
 

@@ -1,29 +1,33 @@
 package com.example.apipractice.view.fragment.editprofile
 
-import android.content.ContentValues
-import android.util.Log
 import androidx.databinding.ObservableField
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.apipractice.R
 import com.example.apipractice.application.MyApplication
 import com.example.apipractice.basemodel.BaseModel
 import com.example.apipractice.basemodel.Constants
 import com.example.apipractice.datamodel.ProfileData
-import com.example.apipractice.network.ProfileListener
-import com.example.apipractice.repo.UserRepository
+import com.example.apipractice.datamodel.ProfileModel
+import com.example.apipractice.network.NetworkModule
 import com.google.gson.JsonObject
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class EditProfileVM : ViewModel() {
 
-    /** Selected Sign Up Type */
-    var signUpType = ObservableField(Constants.USER_TYPE.PATIENT)
-
-    /** Data Members */
+    /* Data Members */
     var profileData: ProfileData? = null
 
-    /** Initialize MyApplication variable */
+    /* Initialize MyApplication variable */
     val app = MyApplication.getApplication()
 
+    /* MutableLiveData Variable to Store Response  */
+    val apiResponse = MutableLiveData<ProfileModel>()
+
+    /* MutableLiveData Variable to Store Error  */
+    var errorMessage = MutableLiveData<String?>()
 
     /**
      * Edit Basic Details Field
@@ -38,8 +42,6 @@ class EditProfileVM : ViewModel() {
     val isValidAlternatePhoneNumberFirst = ObservableField(BaseModel(true, ""))
     val alternatePhoneSecondNumberField = ObservableField("")
     val isValidAlternatePhoneNumberSecond = ObservableField(BaseModel(true, ""))
-
-    var profileAuthListener: ProfileListener? = null
 
     /** On Update Button Click */
     fun updateProfileData() {
@@ -88,11 +90,43 @@ class EditProfileVM : ViewModel() {
                 alternatePhoneSecondNumberField.get()
             )
         }
-        Log.e(ContentValues.TAG, "response $jsonObject")
 
         /** Call API */
-        val loginResponse = UserRepository().updateProfile(jsonObject)
-        profileAuthListener?.onSuccess(loginResponse)
+        NetworkModule.retrofit.updateUserProfile(jsonObject)
+            .enqueue(object : Callback<ProfileModel> {
+                override fun onResponse(
+                    call: Call<ProfileModel>,
+                    response: Response<ProfileModel>
+                ) {
+                    if (response.isSuccessful) {
+                        if (response.body() != null && response.body()?.status == true) {
+
+                            /* Set Value*/
+                            apiResponse.postValue(response.body())
+
+                            /* Set the message */
+                            errorMessage.postValue(response.body()?.message)
+                        } else {
+
+                            /* Set the message */
+                            errorMessage.postValue(response.body()?.message)
+                        }
+
+                    } else {
+
+                        /* Set the message  */
+                        errorMessage.postValue(response.message())
+                    }
+                }
+
+                override fun onFailure(call: Call<ProfileModel>, t: Throwable) {
+
+                    /* Set the message  */
+                    errorMessage.postValue(t.cause.toString())
+                }
+
+            })
+
     }
 
     /**

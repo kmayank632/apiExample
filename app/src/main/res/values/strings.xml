@@ -14,7 +14,7 @@
     <string name="home">Home</string>
     <string name="sign_out">Sign out</string>
     <string name="location">533 Iyengar Stream, Tagoreberg, Madya Pradesh</string>
-    <string name="existing_health_issues">Existing health isuues</string>
+    <string name="existing_health_issues">Existing health issues</string>
     <string name="health_insurance_policy_no">Health insurance policy no.</string>
     <string name="edit_basic_detail_text">Edit Basic Details</string>
     <string name="login">Login</string>
@@ -40,8 +40,8 @@
     <string name="address_line_2">Address line 2*</string>
     <string name="first_alternate_no_text">1st Alternate phone no.</string>
     <string name="second_alternate_no_text">2nd Alternate phone no.</string>
-    <string name="altenate_pjone_no_2_hint">2nd Alternate phone no</string>
-    <string name="altenate_pjone_no_1_hint">1st Alternate phone no.</string>
+    <string name="alternate_phone_no_2_hint">2nd Alternate phone no</string>
+    <string name="alternate_phone_no_1_hint">1st Alternate phone no.</string>
     <string name="cancel">Cancel</string>
     <string name="update">Update</string>
     <string name="profile_update">Profile Updated Successfully</string>

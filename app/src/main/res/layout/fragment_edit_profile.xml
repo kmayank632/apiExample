@@ -141,7 +141,7 @@
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/firstAlternateNoEditText"
                         style="@style/EditTextStyle"
-                        android:hint="@string/altenate_pjone_no_1_hint"
+                        android:hint="@string/alternate_phone_no_1_hint"
                         android:inputType="number"
                         android:text="@={viewModel.alternatePhoneFirstNumberField}"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -160,7 +160,7 @@
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/secondAlternateNoEditText"
                         style="@style/EditTextStyle"
-                        android:hint="@string/altenate_pjone_no_2_hint"
+                        android:hint="@string/alternate_phone_no_2_hint"
                         android:inputType="number"
                         android:text="@={viewModel.alternatePhoneSecondNumberField}"
                         app:layout_constraintEnd_toEndOf="parent"
