@@ -39,7 +39,7 @@ class ProfileVM : ViewModel() {
 
 
     /* Ui Fields */
-    val visible = ObservableBoolean(false)
+    val visibleLoader = ObservableBoolean(false)
     val profilePictureField = ObservableField("")
     val medoPlusIdField = ObservableField("")
     val firstNameField = ObservableField("")
@@ -64,7 +64,7 @@ class ProfileVM : ViewModel() {
     fun getProfileData() {
 
         /* Set Progress Bar Visibility Visible*/
-        visible.set(true)
+        visibleLoader.set(true)
 
         NetworkModule.retrofit.getProfile()
             .enqueue(object : Callback<ProfileModel> {
@@ -114,7 +114,7 @@ class ProfileVM : ViewModel() {
             })
 
         /* Set Progress Bar Visibility Gone*/
-        visible.set(false)
+        visibleLoader.set(false)
 
 
     }

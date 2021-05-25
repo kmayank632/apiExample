@@ -21,7 +21,7 @@ class SplashFragment : Fragment() {
     lateinit var binding: FragmentSplashBinding
 
     /* StorePreferences Variable */
-    lateinit var storePreferences: StorePreferences
+    private lateinit var storePreferences: StorePreferences
 
     /* Time delay Variable */
     private val time : Long = 2 * 1000 /* 2 Seconds */

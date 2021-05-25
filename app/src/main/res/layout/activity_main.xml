@@ -31,7 +31,7 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             app:defaultNavHost="true"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/bottom_navigation"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/toolbar"
@@ -41,11 +41,11 @@
             android:id="@+id/bottom_navigation"
             android:layout_width="match_parent"
             android:layout_height="@dimen/_45sdp"
-            app:fab_size="@dimen/_16sdp"
             android:background="@color/skyBlue"
+            app:fab_size="@dimen/_16sdp"
             app:itemIconTint="@color/colorLightGreen"
             app:itemTextColor="@color/colorLightGreen"
-            app:layout_constraintBottom_toBottomOf="@+id/fragment_container"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:menu="@menu/bottom_navigation_menu" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

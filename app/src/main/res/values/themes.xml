@@ -126,4 +126,9 @@
         <item name="buttonTint">@android:color/transparent</item>
         <item name="buttonTintMode">src_over</item>
     </style>
+
+    <style name="MyDialogTheme" parent="Theme.AppCompat.Light.Dialog.Alert">
+     <item name="colorPrimary">@color/black</item>
+    </style>
+
 </resources>

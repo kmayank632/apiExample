@@ -3,16 +3,14 @@ package com.example.apipractice.network
 import com.example.apipractice.datamodel.BannerListModel
 import com.example.apipractice.datamodel.LoginModel
 import com.example.apipractice.datamodel.ProfileModel
+import com.example.apipractice.datamodel.TalukaModel
 import com.google.gson.JsonObject
 import okhttp3.OkHttpClient
 import retrofit2.Call
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import retrofit2.http.Body
-import retrofit2.http.GET
-import retrofit2.http.POST
-import retrofit2.http.PUT
+import retrofit2.http.*
 
 interface MyApi {
 
@@ -37,6 +35,9 @@ interface MyApi {
     @POST("${CMSPATH}public/banner-listing")
     fun getBannerList(): Call<BannerListModel>
 
+    /** Get Block/Tehsil From PinCode */
+    @GET("${PATH}open/address-autofill")
+    fun getTaluka(@Query("pin") pinCode: String): Call<TalukaModel>
 
 
 }

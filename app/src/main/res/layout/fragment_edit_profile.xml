@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
         <variable
             name="viewModel"
             type="com.example.apipractice.view.fragment.editprofile.EditProfileVM" />
@@ -63,8 +63,7 @@
                         android:text="@={viewModel.firstNameField}"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/firstNameTextView"
-                        app:setError="@{viewModel.isValidFirstName}" />
+                        app:layout_constraintTop_toBottomOf="@id/firstNameTextView" />
 
                     <com.google.android.material.textview.MaterialTextView
                         android:id="@+id/lastNameTextView"
@@ -82,8 +81,7 @@
                         android:text="@={viewModel.lastNameField}"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="@id/lastNameTextView"
-                        app:layout_constraintTop_toBottomOf="@id/lastNameTextView"
-                        app:setError="@{viewModel.isValidLastName}" />
+                        app:layout_constraintTop_toBottomOf="@id/lastNameTextView" />
 
                     <com.google.android.material.textview.MaterialTextView
                         android:id="@+id/genderTextView"
@@ -147,7 +145,7 @@
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/firstAlternateNoTextView"
-                        app:setError="@{viewModel.isValidAlternatePhoneNumberFirst}" />
+                         />
 
                     <com.google.android.material.textview.MaterialTextView
                         android:id="@+id/secondAlternateNoTextView"
@@ -166,7 +164,131 @@
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/secondAlternateNoTextView"
-                        app:setError="@{viewModel.isValidAlternatePhoneNumberSecond}" />
+                         />
+
+                      <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/addressLine1TextView"
+                        style="@style/TextViewStyle"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:text="@string/address_line_1"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/secondAlternateNoEditText"
+                        tools:text="@string/address_line_1" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/addressLine1TextViewValue"
+                        style="@style/TextViewStyle.HintColor"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/et_bg"
+                        android:drawableEnd="@drawable/ic_gps"
+                        android:gravity="center_vertical"
+                        android:hint="@string/select_address"
+                        android:text="@{viewModel.addressFirstField}"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHeight_min="@dimen/_35sdp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/addressLine1TextView" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/addressLine2TextView"
+                        style="@style/TextViewStyle"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:text="@string/address_line_2"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/addressLine1TextViewValue"
+                        tools:text="@string/address_line_2" />
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/addressLine2EditText"
+                        style="@style/EditTextStyle"
+                        android:hint="@string/address_line_1_hint"
+                        android:inputType="textMultiLine"
+                        android:maxLines="4"
+                        android:minLines="1"
+                        android:scrollbars="vertical"
+                        android:text="@={viewModel.addressSecondField}"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/addressLine2TextView" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/pinCodeTextView"
+                        style="@style/TextViewStyle"
+                        android:layout_marginTop="@dimen/_5sdp"
+                        android:text="@string/pin"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/addressLine2EditText" />
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/pinCodeEditText"
+                        style="@style/EditTextStyle"
+                        android:hint="@string/pin_hint"
+                        android:inputType="number"
+                        android:text="@={viewModel.pinCodeField}"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/pinCodeTextView"
+                         />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/stateTextView"
+                        style="@style/TextViewStyle"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:text="@string/state"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/pinCodeEditText" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/statetextSpinner"
+                        style="@style/TextViewStyle.HintColor"
+                        android:layout_height="@dimen/_35sdp"
+                        android:background="@drawable/et_bg"
+                        android:gravity="center_vertical"
+                        android:hint="@string/select_state"
+                        android:text="@{viewModel.stateField}"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="@id/stateTextView"
+                        app:layout_constraintTop_toBottomOf="@id/stateTextView" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/districtTextView"
+                        style="@style/TextViewStyle"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:text="@string/district"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/statetextSpinner" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/districtTextSpinner"
+                        style="@style/TextViewStyle.HintColor"
+                        android:layout_height="@dimen/_35sdp"
+                        android:background="@drawable/et_bg"
+                        android:gravity="center_vertical"
+                        android:hint="@string/select_district"
+                        android:text="@{viewModel.districtField}"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/districtTextView" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/blockTextView"
+                        style="@style/TextViewStyle"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:text="@string/block"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/districtTextSpinner" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/blockTextSpinner"
+                        style="@style/TextViewStyle.HintColor"
+                        android:layout_height="@dimen/_35sdp"
+                        android:background="@drawable/et_bg"
+                        android:gravity="center_vertical"
+                        android:hint="@string/select_block"
+                        android:text="@{viewModel.talukaField}"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/blockTextView" />
 
                     <com.google.android.material.button.MaterialButton
                         android:id="@+id/cancelButton"
@@ -178,7 +300,7 @@
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toStartOf="@+id/updateButton"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/secondAlternateNoEditText" />
+                        app:layout_constraintTop_toBottomOf="@id/blockTextSpinner" />
 
                     <com.google.android.material.button.MaterialButton
                         android:id="@+id/updateButton"

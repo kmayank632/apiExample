@@ -58,6 +58,9 @@
             app:destination="@id/profileFragment"
             app:popUpTo="@id/editProfileFragment"
             app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_editProfileFragment_to_selectAddressFragment"
+            app:destination="@id/selectAddressFragment" />
     </fragment>
 
     <fragment
@@ -66,5 +69,9 @@
         android:label="HomeFragment" >
 
     </fragment>
+    <fragment
+        android:id="@+id/selectAddressFragment"
+        android:name="com.example.apipractice.view.fragment.selectaddress.SelectAddressFragment"
+        android:label="SelectAddressFragment" />
 
 </navigation>
