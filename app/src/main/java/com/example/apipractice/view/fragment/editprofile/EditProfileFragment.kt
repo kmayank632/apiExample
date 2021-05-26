@@ -75,8 +75,8 @@ class EditProfileFragment : Fragment() {
 
                     }
 
-                    viewModel.latitude = argument.latitude
-                    viewModel.longitude = argument.longitude
+                    viewModel.latitude = argument.latitude.toInt()
+                    viewModel.longitude = argument.longitude.toInt()
                 }
             }
         }

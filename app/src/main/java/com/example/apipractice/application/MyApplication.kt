@@ -6,7 +6,7 @@ import android.content.Context
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.multidex.MultiDex
-import com.example.apipractice.datamodel.ProfileData
+import com.example.apipractice.datamodel.CustomerProfileModel
 
 
 class MyApplication : Application() {
@@ -21,7 +21,7 @@ class MyApplication : Application() {
     private var loginUserType: String? = ""
 
     /** Profile Data */
-    private var userProfileData: ProfileData? = null
+    private var userProfileData: CustomerProfileModel.Data? = null
 
     /** get Instance of the activity */
     companion object {
@@ -99,7 +99,7 @@ class MyApplication : Application() {
     /**
      * store profile data
      * */
-    fun setProfileData(profileData: ProfileData) {
+    fun setProfileData(profileData: CustomerProfileModel.Data) {
         userProfileData = profileData
     }
 

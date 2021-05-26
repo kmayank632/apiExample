@@ -1,6 +1,6 @@
 package com.example.apipractice.datamodel
 
-data class Profile(
+data class UpdateCustomerProfile(
     val `data`: Data?,
     val message: String?,
     val status: Boolean?
@@ -10,11 +10,14 @@ data class Profile(
         val _draft: String?,
         val _family: String?,
         val _id: String?,
+        val _master: String?,
         val _vle: Vle?,
         val address: Address?,
+        val aggregateRating: Int?,
         val alternateNumber: String?,
         val alternateNumber2: String?,
         val bloodGroup: String?,
+        val createdAt: String?,
         val dob: String?,
         val documents: List<Document?>?,
         val email: String?,
@@ -26,7 +29,9 @@ data class Profile(
         val medoplusId: String?,
         val number: String?,
         val pictures: List<Picture?>?,
-        val role: String?
+        val role: String?,
+        val status: String?,
+        val updatedAt: String?
     ) {
         data class Vle(
             val _id: String?,
@@ -44,7 +49,7 @@ data class Profile(
             val block: Block?,
             val district: District?,
             val districtCode: Int?,
-            val geo: List<Double?>?,
+            val geo: List<Int?>?,
             val line1: Line1?,
             val line2: Line2?,
             val state: State?,
@@ -131,6 +136,7 @@ data class Profile(
         )
 
         data class Picture(
+            val _id: String?,
             val preview: String?,
             val type: String?,
             val url: String?

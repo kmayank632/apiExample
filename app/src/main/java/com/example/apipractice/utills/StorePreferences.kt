@@ -7,7 +7,7 @@ import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.emptyPreferences
 import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.datastore.preferences.createDataStore
-import com.example.apipractice.datamodel.ProfileData
+import com.example.apipractice.datamodel.CustomerProfileModel
 import com.google.gson.Gson
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
@@ -87,7 +87,7 @@ class StorePreferences constructor(context: Context) {
     companion object StoreConfigPreferenceKeys {
         var Token = stringPreferencesKey("LOGIN_DATA_Token")
         var User = stringPreferencesKey("USER_TYPE")
-        var DEMAND_PROFILE_DATA = Pair("DEMAND_PROFILE_DATA", ProfileData())
+        var DEMAND_PROFILE_DATA = Pair("DEMAND_PROFILE_DATA", CustomerProfileModel.Data())
 
     }
 }

@@ -121,8 +121,18 @@ class LoginVM : ViewModel() {
                                         it1
                                     )
                                 }
-
                             }
+                            viewModelScope.launch {
+                                response.body()?.data?.token?.let { it1 ->
+                                    storePreferences.storeValue(
+                                        StorePreferences.Token,
+                                        it1
+                                    )
+                                }
+                            }
+
+                            app.setToken(response.body()?.data?.token)
+
                             /* Set the message */
                             errorMessage.postValue(response.body()?.message)
                         } else {

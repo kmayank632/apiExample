@@ -7,7 +7,9 @@ import kotlinx.parcelize.Parcelize
 
 @Parcelize
 @Keep
-data class ProfileExistingAilments(
-    @SerializedName("ailment") val ailment: List<ProfileAilment>?,
-    val isCovidVaccined: Boolean?
+data class UploadFileModel(
+    val status: Boolean?,
+    val message: String?,
+    @SerializedName("data") val `data`: List<ImageData>?,
+    val metaData: ImageMetaData
 ) : Parcelable

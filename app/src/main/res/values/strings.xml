@@ -52,6 +52,8 @@
     <string name="choose_image_source">Choose Image Source</string>
     <string name="camera">Camera</string>
     <string name="gallery">Gallery</string>
+    <string name="error_message">sorry</string>
+    <string name="camera_permission_denied">Camera Permission Denied</string>
     <string name="no_relevant_app">No Relevant App</string>
     <string name="collect_location_data">Collect Location Data</string>
     <string name="grant_permission">Grant Permission</string>

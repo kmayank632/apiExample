@@ -1,22 +1,30 @@
 package com.example.apipractice.view.fragment.editprofile
 
+import android.util.Log
 import androidx.databinding.Observable
 import androidx.databinding.ObservableField
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.example.apipractice.R
 import com.example.apipractice.application.MyApplication
 import com.example.apipractice.basemodel.BaseModel
 import com.example.apipractice.basemodel.Constants
-import com.example.apipractice.datamodel.ProfileData
-import com.example.apipractice.datamodel.ProfileModel
+import com.example.apipractice.datamodel.CustomerProfileModel
+import com.example.apipractice.datamodel.StateDistricCodesModel
 import com.example.apipractice.datamodel.TalukaModel
+import com.example.apipractice.datamodel.UpdateCustomerProfile
 import com.example.apipractice.network.NetworkModule
+import com.example.apipractice.utills.TAG
 import com.example.apipractice.view.listener.ResourceProvider
+import com.google.gson.JsonArray
 import com.google.gson.JsonObject
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.util.*
 
 class EditProfileVM : ViewModel() {
 
@@ -25,6 +33,14 @@ class EditProfileVM : ViewModel() {
 
     /* Initialize ResourceProvider */
     val resourceProvider: ResourceProvider = ResourceProvider(MyApplication.getApplication())
+
+    /*for Capitalize First Letter*/
+    fun String.capitalizeFirstLetter() = split(" ").map { it.replaceFirstChar {
+        if (it.isLowerCase()) it.titlecase(
+            Locale.getDefault()
+        ) else it.toString()
+    } }.joinToString(" ")
+
 
     /** SignUp Type */
     enum class SignUpType {
@@ -35,21 +51,22 @@ class EditProfileVM : ViewModel() {
     val addressSecondField = ObservableField("")
     val isValidSecondAddress = ObservableField(BaseModel(true, ""))
     val isValidFirstAddress = ObservableField(BaseModel(true, ""))
+
     /* Data Members */
-    var profileData: ProfileData? = null
+    var profileData: CustomerProfileModel.Data? = null
 
     /* Initialize MyApplication variable */
     val app = MyApplication.getApplication()
 
     /* MutableLiveData Variable to Store Response  */
-    val apiResponse = MutableLiveData<ProfileModel>()
+    val apiResponse = MutableLiveData<UpdateCustomerProfile>()
 
     /* MutableLiveData Variable to Store Error  */
     var errorMessage = MutableLiveData<String?>()
 
-    val isValidStateField= ObservableField(BaseModel(true, ""))
+    val isValidStateField = ObservableField(BaseModel(true, ""))
     val stateField = ObservableField("")
-    val isValidDistrictField= ObservableField(BaseModel(true, ""))
+    val isValidDistrictField = ObservableField(BaseModel(true, ""))
     val districtField = ObservableField("")
     val talukaField = ObservableField("")
     val isValidTalukaField = ObservableField(BaseModel(true))
@@ -75,8 +92,8 @@ class EditProfileVM : ViewModel() {
     private var stateCodeField = -1
     private var districtCodeField = -1
     var selectedTaluka = ""
-    var latitude = 0.0
-    var longitude = 0.0
+    var latitude: Int? = 0
+    var longitude: Int? = 0
 
 
     /** Listener to Detect Pin Code Changes */
@@ -145,7 +162,7 @@ class EditProfileVM : ViewModel() {
 
         /* Check Address line 1 */
         if (addressFirstField.get()?.trim()
-                .isNullOrEmpty() || (latitude == 0.0 && longitude == 0.0)
+                .isNullOrEmpty() || (latitude == 0 && longitude == 0)
         ) {
             /* Notify User */
             isValidFirstAddress.set(
@@ -218,7 +235,6 @@ class EditProfileVM : ViewModel() {
     /** On Update Button Click */
     fun updateProfileData() {
 
-        /** PUT Request Body Parameters */
         val jsonObject = JsonObject()
         val firstNameJsonObject = JsonObject()
         firstNameJsonObject.addProperty(
@@ -241,6 +257,7 @@ class EditProfileVM : ViewModel() {
             "lastName",
             lastNameJsonObject
         )
+
         jsonObject.addProperty(
             "gender",
             when (radiochecked.get()) {
@@ -249,6 +266,58 @@ class EditProfileVM : ViewModel() {
                 else -> Constants.GENDER.MALE
             }
         )
+
+        val addressJsonObject = JsonObject()
+        val addressLine1JsonObject = JsonObject()
+        addressLine1JsonObject.addProperty(
+            "en",
+            addressFirstField.get()?.trim() ?: ""
+        )
+        addressLine1JsonObject.addProperty("hi", addressFirstField.get()?.trim() ?: "")
+
+        addressJsonObject.add("line1", addressLine1JsonObject)
+
+        val addressLine2JsonObject = JsonObject()
+        addressLine2JsonObject.addProperty(
+            "en",
+            addressSecondField.get()?.trim() ?: ""
+        )
+        addressLine2JsonObject.addProperty("hi", addressSecondField.get()?.trim() ?: "")
+
+        addressJsonObject.add("line2", addressLine2JsonObject)
+
+        val stateJsonObject = JsonObject()
+        stateJsonObject.addProperty("en", stateField.get())
+        stateJsonObject.addProperty("hi", stateField.get())
+
+        addressJsonObject.add("state", stateJsonObject)
+
+        val districtJsonObject = JsonObject()
+        districtJsonObject.addProperty("en", districtField.get())
+        districtJsonObject.addProperty("hi", districtField.get())
+
+        addressJsonObject.add("district", districtJsonObject)
+
+        val blockJsonObject = JsonObject()
+        blockJsonObject.addProperty("en", talukaField.get())
+        blockJsonObject.addProperty("hi", talukaField.get())
+
+        addressJsonObject.add("block", blockJsonObject)
+
+        addressJsonObject.addProperty("zipcode", pinCodeField.get())
+        addressJsonObject.addProperty("stateCode", stateCodeField)
+        addressJsonObject.addProperty("stateCodeAlpha", alphaCodeField)
+        addressJsonObject.addProperty("districtCode", districtCodeField)
+        addressJsonObject.add("geo", JsonArray().apply {
+            add(longitude)
+            add(latitude)
+        })
+
+        jsonObject.add(
+            "address",
+            addressJsonObject
+        )
+
         if (!alternatePhoneFirstNumberField.get().isNullOrEmpty()) {
             jsonObject.addProperty(
                 "alternateNumber",
@@ -262,15 +331,19 @@ class EditProfileVM : ViewModel() {
                 alternatePhoneSecondNumberField.get()
             )
         }
+        Log.e(TAG, "responsee ${jsonObject}")
 
         /** Call API */
         NetworkModule.retrofit.updateUserProfile(jsonObject)
-            .enqueue(object : Callback<ProfileModel> {
+            .enqueue(object : Callback<UpdateCustomerProfile> {
                 override fun onResponse(
-                    call: Call<ProfileModel>,
-                    response: Response<ProfileModel>
+                    call: Call<UpdateCustomerProfile>,
+                    response: Response<UpdateCustomerProfile>
                 ) {
+                    Log.e(TAG, "response ${response.body()}")
+
                     if (response.isSuccessful) {
+                        Log.e(TAG, "response ${response.body()}")
                         if (response.body() != null && response.body()?.status == true) {
 
                             /* Set Value*/
@@ -291,7 +364,7 @@ class EditProfileVM : ViewModel() {
                     }
                 }
 
-                override fun onFailure(call: Call<ProfileModel>, t: Throwable) {
+                override fun onFailure(call: Call<UpdateCustomerProfile>, t: Throwable) {
 
                     /* Set the message  */
                     errorMessage.postValue(t.cause.toString())
@@ -304,7 +377,7 @@ class EditProfileVM : ViewModel() {
     /**
      * Set Profile Data
      * */
-    fun setUiData(data: ProfileData) {
+    fun setUiData(data: CustomerProfileModel.Data) {
 
         profileData = data
 
@@ -330,15 +403,15 @@ class EditProfileVM : ViewModel() {
         alternatePhoneFirstNumberField.set("")
         alternatePhoneSecondNumberField.set("")
         data.firstName?.en?.let {
-            firstNameField.set(it.trim())
+            firstNameField.set(it.trim().capitalizeFirstLetter())
         }
 
         data.lastName?.en?.let {
-            lastNameField.set(it.trim())
+            lastNameField.set(it.trim().capitalizeFirstLetter())
         }
 
         data.address?.line1?.en?.let {
-            addressFirstField.set(it.trim())
+            addressFirstField.set(it.trim().capitalizeFirstLetter())
         }
 
         data.address?.line2?.en?.let {
@@ -346,11 +419,11 @@ class EditProfileVM : ViewModel() {
         }
 
         data.address?.state?.en?.let {
-            stateField.set(it)
+            stateField.set(it.capitalizeFirstLetter())
         }
 
         data.address?.district?.en?.let {
-            districtField.set(it)
+            districtField.set(it.capitalizeFirstLetter())
         }
 
         data.address?.block?.en?.let {
@@ -418,6 +491,12 @@ class EditProfileVM : ViewModel() {
                                         talukaFieldList.addAll(it)
                                     }
 
+                                    /* Get Area Related Codes */
+                                    getStateDistrictCodes(
+                                        stateField.get() ?: "",
+                                        districtField.get() ?: ""
+                                    )
+
                                     /*Set the message  */
                                     errorMessage.postValue(response.body()?.message)
                                 }
@@ -443,4 +522,77 @@ class EditProfileVM : ViewModel() {
         }
 
     }
+
+    /**
+     * Get State District Codes
+     * */
+    private fun getStateDistrictCodes(state: String, district: String) {
+
+        /* Check Data */
+        if (state.trim().isEmpty() || state.trim().isEmpty()) {
+
+            /* Reset Area Data */
+            resetStateDistrictBlock()
+
+            return
+        }
+
+        viewModelScope.launch(Dispatchers.IO) {
+
+            NetworkModule.retrofit.getStateDistricCodes(
+                state.trim().lowercase(),
+                district.trim().lowercase()
+            )
+                .enqueue(object : Callback<StateDistricCodesModel> {
+                    override fun onResponse(
+
+                        call: Call<StateDistricCodesModel>,
+                        response: Response<StateDistricCodesModel>
+                    ) {
+                        if (response.isSuccessful) {
+                            if (response.body()?.status == true && response.body() != null) {
+
+                                response.body()?.data?.let { data ->
+
+                                    data.statecode?.let {
+                                        stateCodeField = it.toInt()
+                                    }
+
+                                    data.alphacode?.let {
+                                        alphaCodeField = it.trim()
+                                    }
+
+                                    data.district?.let {
+                                        districtCodeField = it.toInt()
+                                    }
+                                }
+                                /*Set the message  */
+                                errorMessage.postValue(response.body()?.message)
+                            } else {
+                                /*Set the message  */
+                                errorMessage.postValue(response.body()?.message)
+                            }
+                        } else {
+                            /*Set the message  */
+                            errorMessage.postValue(response.message())
+                        }
+                    }
+
+
+                    override fun onFailure(call: Call<StateDistricCodesModel>, t: Throwable) {
+
+                        /*Set the Failure message  */
+                        errorMessage.postValue(t.cause.toString())
+
+                        /* Reset Area Data */
+                        resetStateDistrictBlock()
+                    }
+
+                })
+
+
+        }
+    }
+
+
 }

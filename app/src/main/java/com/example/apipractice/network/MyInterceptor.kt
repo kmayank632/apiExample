@@ -15,7 +15,6 @@ class MyInterceptor : Interceptor {
         Log.e(TAG,"tokenheader ${app.getToken()}")
         val request = chain.request()
             .newBuilder()
-            .addHeader("Accept:", "application/json")
             .addHeader(
                 "Authorization",
                 "Bearer ${app.getToken()}"

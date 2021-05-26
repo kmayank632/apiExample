@@ -250,26 +250,26 @@
                 <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/nameTextView"
                     style="@style/TextViewStyle.MEDIUM"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
+                    android:layout_marginStart="@dimen/_20sdp"
                     android:text="@{viewModel.firstNameField + ' ' + viewModel.lastNameField}"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/appCompatImageView"
                     app:layout_constraintTop_toTopOf="@+id/appCompatImageView" />
 
                 <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/phoneNoTextView"
                     style="@style/TextViewStyle.SMALL"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
+                    android:layout_marginStart="@dimen/_20sdp"
                     android:layout_marginTop="@dimen/_6sdp"
                     android:fontFamily="@font/open_sans_bold"
                     android:hint="@string/phn"
                     android:text="@{viewModel.phoneNumberField}"
-                    android:textAlignment="viewEnd"
                     android:textSize="@dimen/_10sdp"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/appCompatImageView"
                     app:layout_constraintTop_toBottomOf="@id/nameTextView" />
-
 
                 <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/appCompatImageView"
@@ -287,7 +287,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:src="@drawable/ic_edit_marker"
-                    android:tint="@color/black"
+                    android:tint="@color/white"
                     app:layout_constraintBottom_toBottomOf="@+id/appCompatImageView"
                     app:layout_constraintEnd_toEndOf="@+id/appCompatImageView" />
 

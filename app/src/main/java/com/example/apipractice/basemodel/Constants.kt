@@ -16,6 +16,19 @@ object Constants {
         }
     }
 
+    /** Image Type Keys
+     *
+     * These Keys are dependent of Configuration defined by Backend in APIs
+     * Don't Change it without permission
+     * */
+    interface IMAGE_TYPE {
+        companion object {
+            const val THUMBNAIL = "THUMBNAIL"
+            const val ORIGINAL = "ORIGINAL"
+        }
+    }
+
+
     /** Gender Type Keys
      *
      * These Keys are dependent of Configuration defined by Backend in APIs

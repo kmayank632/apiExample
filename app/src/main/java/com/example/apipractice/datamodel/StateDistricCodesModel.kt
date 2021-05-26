@@ -7,9 +7,8 @@ import kotlinx.parcelize.Parcelize
 
 @Parcelize
 @Keep
-data class ProfileDocument(
-    @SerializedName("_id") val _id: String? = null,
-    val type: String? = null,
-    val preview: String? = null,
-    val url: String? = null
+data class StateDistricCodesModel(
+    val status: Boolean?,
+    val message: String?,
+    @SerializedName("data") val `data`: StateDistricCodesData?,
 ) : Parcelable

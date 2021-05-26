@@ -29,7 +29,7 @@ class MainActivity : AppCompatActivity() {
         observeData()
         navController = Navigation.findNavController(this, R.id.fragment_container)
         binding.bottomNavigation.setOnNavigationItemSelectedListener(navListener)
-        binding.viewModel=viewModel
+        binding.viewModel = viewModel
 
         /** Bottom Navigation Show and Hide
          * Toolbar Show and Hide
@@ -46,7 +46,7 @@ class MainActivity : AppCompatActivity() {
                     setToolBarTitle(viewModel.resourceProvider.getString(R.string.my_profile))
                     binding.bottomNavigation.visibility = View.VISIBLE
                 }
-                R.id.homeFragment ->{
+                R.id.homeFragment -> {
                     binding.toolbar.visibility = View.VISIBLE
                     setToolBarTitle(viewModel.resourceProvider.getString(R.string.home))
                     binding.bottomNavigation.visibility = View.VISIBLE
