@@ -17,6 +17,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.app.ActivityCompat
 import androidx.core.os.bundleOf
 import androidx.databinding.DataBindingUtil
+import androidx.databinding.ObservableField
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.setFragmentResult
 import androidx.lifecycle.ViewModelProvider
@@ -47,7 +48,8 @@ class SelectAddressFragment : Fragment() {
     /* ViewModel Variable */
     lateinit var viewModel: SelectAddressVM
 
-    private lateinit var builder:AlertDialog.Builder
+    private lateinit var builder: AlertDialog.Builder
+
     /**
      * Keys
      * */
@@ -68,6 +70,8 @@ class SelectAddressFragment : Fragment() {
         onLastLocation(location)
     }
 
+    private var status = ObservableField("")
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -78,7 +82,7 @@ class SelectAddressFragment : Fragment() {
         )
         viewModel = ViewModelProvider(this).get(SelectAddressVM::class.java)
         binding.viewModel = viewModel
-        builder = AlertDialog.Builder(requireContext(),R.style.MyDialogTheme)
+        builder = AlertDialog.Builder(requireContext(), R.style.MyDialogTheme)
         return binding.root
     }
 
@@ -90,6 +94,14 @@ class SelectAddressFragment : Fragment() {
 
         /* Set Listener */
         setListener()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        if (status.get() == "status") {
+            notifyBeforePermission()
+            status.set("")
+        }
     }
 
     /** Set Listeners to Views */
@@ -178,6 +190,9 @@ class SelectAddressFragment : Fragment() {
 
                     /* Go to Location Service Settings */
                     startActivity(Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS))
+
+                    status.set("status")
+
                 } else {
 
                     /* Dismiss Dialog */
@@ -185,6 +200,7 @@ class SelectAddressFragment : Fragment() {
 
                     /* Check For GPS Permission */
                     checkForGPSPermission()
+
                 }
 
             }

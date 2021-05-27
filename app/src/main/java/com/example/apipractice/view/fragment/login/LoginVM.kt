@@ -106,6 +106,10 @@ class LoginVM : ViewModel() {
                     call: Call<LoginModel>,
                     response: Response<LoginModel>
                 ) {
+
+                    /* Hide ProgressBar */
+                    visible.set(false)
+
                     if (response.isSuccessful) {
                         if (response.body()?.status == true && response.body() != null) {
 
@@ -148,6 +152,9 @@ class LoginVM : ViewModel() {
 
                 override fun onFailure(call: Call<LoginModel>, t: Throwable) {
 
+                    /* Hide ProgressBar */
+                    visible.set(false)
+
                     /*Set the Failure message  */
                     errorMessage.postValue(t.cause.toString())
                 }
@@ -155,8 +162,6 @@ class LoginVM : ViewModel() {
             })
 
 
-        /* Hide ProgressBar */
-        visible.set(false)
 
     }
 }

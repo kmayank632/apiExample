@@ -1,5 +1,7 @@
 package com.example.apipractice.view.fragment.home
 
+import android.view.WindowManager
+import androidx.databinding.ObservableBoolean
 import androidx.databinding.ObservableField
 import androidx.lifecycle.ViewModel
 import com.example.apipractice.application.MyApplication
@@ -16,6 +18,7 @@ import retrofit2.Response
 class HomeVM : ViewModel() {
     var bannerAdapterList: ArrayList<BannerHomeItemViewModel> = ArrayList()
     var bannerAdapter: BaseCommonAdapter<BannerHomeItemViewModel>? = null
+    val visibleLoader = ObservableBoolean(false)
 
     /** Initialize ResourceProvider */
     val resourceProvider: ResourceProvider = ResourceProvider(MyApplication.getApplication())
@@ -23,12 +26,15 @@ class HomeVM : ViewModel() {
 
     /** GET Banner API*/
     fun getBanner() {
+        visibleLoader.set(true)
+
         NetworkModule.retrofit.getBannerList()
             .enqueue(object : Callback<BannerListModel> {
                 override fun onResponse(
                     call: Call<BannerListModel>,
                     response: Response<BannerListModel>
                 ) {
+                    visibleLoader.set(false)
                     /** If Successful*/
                     if (response.isSuccessful) {
                         if (response.body() != null) {
@@ -69,6 +75,8 @@ class HomeVM : ViewModel() {
                     call: Call<BannerListModel>,
                     t: Throwable
                 ) {
+                    visibleLoader.set(false)
+
                     /**Set Snackbar for onFailure*/
                     snakbarMessage.set("${t.cause}")
                 }

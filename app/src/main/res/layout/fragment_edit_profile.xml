@@ -21,7 +21,8 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="0dp">
+                android:layout_height="0dp"
+                snackbarMessage="@{viewModel.isValidFirstAddress}">
 
                 <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/basicDetailTextView"
@@ -60,6 +61,7 @@
                         style="@style/EditTextStyle"
                         android:hint="@string/first_name_edit_text"
                         android:inputType="textPersonName"
+                        setError="@{viewModel.isValidFirstName()}"
                         android:text="@={viewModel.firstNameField}"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
@@ -78,6 +80,7 @@
                         style="@style/EditTextStyle"
                         android:hint="@string/last_name_edit_text"
                         android:inputType="textPersonName"
+                        setError="@{viewModel.isValidLastName()}"
                         android:text="@={viewModel.lastNameField}"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="@id/lastNameTextView"
@@ -141,6 +144,7 @@
                         style="@style/EditTextStyle"
                         android:hint="@string/alternate_phone_no_1_hint"
                         android:inputType="number"
+                        setError="@{viewModel.isValidAlternatePhoneNumberFirst()}"
                         android:text="@={viewModel.alternatePhoneFirstNumberField}"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
@@ -160,6 +164,7 @@
                         style="@style/EditTextStyle"
                         android:hint="@string/alternate_phone_no_2_hint"
                         android:inputType="number"
+                        setError="@{viewModel.isValidAlternatePhoneNumberSecond()}"
                         android:text="@={viewModel.alternatePhoneSecondNumberField}"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
@@ -183,6 +188,7 @@
                         android:drawableEnd="@drawable/ic_gps"
                         android:gravity="center_vertical"
                         android:hint="@string/select_address"
+
                         android:text="@{viewModel.addressFirstField}"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintHeight_min="@dimen/_35sdp"
@@ -206,6 +212,7 @@
                         android:maxLines="4"
                         android:minLines="1"
                         android:scrollbars="vertical"
+                        setError="@{viewModel.isValidSecondAddress()}"
                         android:text="@={viewModel.addressSecondField}"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
@@ -224,6 +231,7 @@
                         style="@style/EditTextStyle"
                         android:hint="@string/pin_hint"
                         android:inputType="number"
+                        setError="@{viewModel.isValidPinCode()}"
                         android:text="@={viewModel.pinCodeField}"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
@@ -248,7 +256,8 @@
                         android:text="@{viewModel.stateField}"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="@id/stateTextView"
-                        app:layout_constraintTop_toBottomOf="@id/stateTextView" />
+                        app:layout_constraintTop_toBottomOf="@id/stateTextView"
+                        />
 
                     <com.google.android.material.textview.MaterialTextView
                         android:id="@+id/districtTextView"
@@ -285,7 +294,6 @@
                         android:background="@drawable/et_bg"
                         android:gravity="center_vertical"
                         android:hint="@string/select_block"
-                        android:text="@{viewModel.talukaField}"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/blockTextView" />
@@ -311,11 +319,25 @@
                         app:layout_constraintStart_toEndOf="@id/cancelButton"
                         app:layout_constraintTop_toTopOf="@id/cancelButton" />
 
+
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
         </androidx.core.widget.NestedScrollView>
+
+        <ProgressBar
+            android:id="@+id/progress"
+            visibleOrGone="@{viewModel.visibleLoader}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:indeterminate="true"
+            android:indeterminateTint="@color/colorLightGreen"
+            android:indeterminateTintMode="src_atop"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

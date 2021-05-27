@@ -306,7 +306,7 @@
                     android:layout_height="wrap_content"
                     android:indeterminate="true"
                     visibleOrGone="@{viewModel.visibleLoader}"
-                    android:indeterminateTint="#aff1da"
+                    android:indeterminateTint="@color/colorLightGreen"
                     android:indeterminateTintMode="src_atop"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"

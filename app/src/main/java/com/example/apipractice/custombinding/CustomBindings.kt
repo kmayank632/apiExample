@@ -55,8 +55,11 @@ fun EditText.setError(
     errorModel: BaseModel?
 ) {
     errorModel?.let {
-        if (!it.status)
-            error = it.message
+        error = if (!it.status)
+            it.message
+        else{
+            null
+        }
     }
 }
 

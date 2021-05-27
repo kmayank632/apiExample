@@ -89,10 +89,12 @@ class ProfileVM : ViewModel() {
         NetworkModule.retrofit.getProfile()
             .enqueue(object : Callback<CustomerProfileModel> {
                 override fun onResponse(
-
                     call: Call<CustomerProfileModel>,
                     response: Response<CustomerProfileModel>
                 ) {
+                    /* Set Progress Bar Visibility Gone*/
+                    visibleLoader.set(false)
+
                     if (response.isSuccessful) {
                         if (response.body()?.status == true && response.body() != null) {
 
@@ -127,14 +129,16 @@ class ProfileVM : ViewModel() {
 
                 override fun onFailure(call: Call<CustomerProfileModel>, t: Throwable) {
 
+                    /* Set Progress Bar Visibility Gone*/
+                    visibleLoader.set(false)
+
                     /*Set the Failure message  */
                     errorMessage.postValue(t.cause.toString())
                 }
 
             })
 
-        /* Set Progress Bar Visibility Gone*/
-        visibleLoader.set(false)
+
 
 
     }
@@ -250,6 +254,9 @@ class ProfileVM : ViewModel() {
     fun uploadImage(file: File, callback: UploadRequestBody.UploadCallback) =
         viewModelScope.launch {
 
+            /* Set Progress Bar Visibility Gone*/
+            visibleLoader.set(true)
+
             /* Prepare Request BODY */
             val body = UploadRequestBody(file, "image" /* Type of  */, callback)
             val multipart = MultipartBody.Part.createFormData(
@@ -266,6 +273,9 @@ class ProfileVM : ViewModel() {
                         call: Call<UploadFileModel>,
                         response: Response<UploadFileModel>
                     ) {
+                        /* Set Progress Bar Visibility Gone*/
+                        visibleLoader.set(false)
+
                         if (response.isSuccessful) {
                             if (response.body()?.status == true && response.body() != null) {
 
@@ -295,6 +305,9 @@ class ProfileVM : ViewModel() {
 
                     override fun onFailure(call: Call<UploadFileModel>, t: Throwable) {
 
+                        /* Set Progress Bar Visibility Gone*/
+                        visibleLoader.set(false)
+
                         /*Set the Failure message  */
                         errorMessage.postValue(t.cause.toString())
                     }
@@ -308,6 +321,9 @@ class ProfileVM : ViewModel() {
      * Save and Complete SignUp Form
      * */
     fun saveDataOnServer(imageUrl: String) {
+
+        /* Set Progress Bar Visibility Gone*/
+        visibleLoader.set(true)
 
         viewModelScope.launch(Dispatchers.IO) {
 
@@ -328,6 +344,9 @@ class ProfileVM : ViewModel() {
                         response: Response<UpdateCustomerProfile>
                     ) {
                         Log.e(TAG, "response ${response.body()}")
+
+                        /* Set Progress Bar Visibility Gone*/
+                        visibleLoader.set(false)
 
                         if (response.isSuccessful) {
                             Log.e(TAG, "response ${response.body()}")
@@ -362,6 +381,9 @@ class ProfileVM : ViewModel() {
                     }
 
                     override fun onFailure(call: Call<UpdateCustomerProfile>, t: Throwable) {
+
+                        /* Set Progress Bar Visibility Gone*/
+                        visibleLoader.set(false)
 
                         /* Set the message  */
                         errorMessage.postValue(t.cause.toString())
